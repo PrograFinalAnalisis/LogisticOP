@@ -8,14 +8,14 @@ public class Paquete {
     public int largo;
     public int ancho;
     public ArrayList<Articulo> paquete;
-    public String nombreClinete;
+    public String nombreCliente;
 
 
-    public Paquete(int largo, int ancho, ArrayList<Articulo> paquete, String nombreClinete) {
+    public Paquete(int largo, int ancho, ArrayList<Articulo> paquete, String nombreCliente) {
         this.largo = largo;
         this.ancho = ancho;
         this.paquete = paquete;
-        this.nombreClinete = nombreClinete;
+        this.nombreCliente = nombreCliente;
     }
 
 
@@ -50,18 +50,15 @@ public class Paquete {
         this.paquete = paquete;
     }
 
-    public String getNombreClinete() {
-        return nombreClinete;
+    public String getNombreCliente() {
+        return nombreCliente;
     }
 
-    public void setNombreClinete(String nombreClinete) {
-        this.nombreClinete = nombreClinete;
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
 
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
-
-
-
 }
