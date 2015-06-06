@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Ventanas_Proyecto</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_ventana_escoger_cliente">ventana_escoger_cliente</string>
+    <string name="title_activity_ventana_escribir_codigo">ventana_escribir_codigo</string>
+    <string name="title_activity_ventana_informacion_acomodo">ventana_informacion_acomodo</string>
+    <string name="title_activity_main_activity2">MainActivity2Activity</string>
+</resources>
