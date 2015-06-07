@@ -1,0 +1,35 @@
+Dimensiones del camión 
+
+Ancho = 4 metros
+Largo =  6 metros
+Alto =    3 metros
+-------------------------------------------------------------------------------------------------
+Dimensiones de la caja
+
+Ancho = 1 metro
+Largo =  2 metros
+Alto    =  1 metro
+---------------------------------------------------------------------------------------------------
+Numero de clientes y camiones
+
+4 clientes -> 2 en la mañana y 2 en la tarde
+4 camiones
+-------------------------------------------------------------------------------------------------------
+Horario
+
+8 a 12  -> matutino
+1 a 5   -> Tarde
+
+8 a 12   ->   Primer cliente
+10 a 1   ->    Segundo cliente
+9 a 2    ->   Tercer cliente
+1 a 5    ->    Cuarto cliente
+
+1 hora ida
+1 hora vuelta
+1 hora descarga
+------------------------------------------------------------------------------------------------------------
+Dimensiones artículos
+Ancho = 50 centímetros
+Largo =  70 centímetros
+Alto    = 50 centímetros
