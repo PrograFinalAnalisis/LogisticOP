@@ -5,20 +5,13 @@ import java.util.ArrayList;
  */
 public class Paquete {
     public int volumen; //volumen del camion
-    public int largo;
-    public int ancho;
-    public ArrayList<Articulo> paquete;
-    public String nombreCliente;
 
-
-    public Paquete(int largo, int ancho, ArrayList<Articulo> paquete, String nombreCliente) {
+    public Paquete(int largo, int ancho, int alto) {
         this.largo = largo;
         this.ancho = ancho;
-        this.paquete = paquete;
-        this.nombreCliente = nombreCliente;
+        this.alto = alto;
+        this.volumen = largo*ancho*alto;
     }
-
-
 
     public int getVolumen() {
         return volumen;
@@ -32,33 +25,40 @@ public class Paquete {
         return largo;
     }
 
-
     public void setLargo(int largo) {
         this.largo = largo;
-
     }
 
     public int getAncho() {
         return ancho;
     }
 
-    public ArrayList<Articulo> getPaquete() {
-        return paquete;
-    }
-
-    public void setPaquete(ArrayList<Articulo> paquete) {
-        this.paquete = paquete;
-    }
-
-    public String getNombreCliente() {
-        return nombreCliente;
-    }
-
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
-    }
-
     public void setAncho(int ancho) {
         this.ancho = ancho;
     }
+
+    public int getAlto() {
+        return alto;
+    }
+
+    public void setAlto(int alto) {
+        this.alto = alto;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public int largo;
+    public int ancho;
+    public int alto;
+    public Cliente cliente;
+
+
+
 }
+
