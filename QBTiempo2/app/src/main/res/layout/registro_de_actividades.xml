@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/titulo_registro_actividades"
+        android:id="@+id/lbtitulo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/fecha"
+        android:id="@+id/lbFecha"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/lbtitulo"
+        android:layout_alignRight="@+id/lbactividad"
+        android:layout_alignEnd="@+id/lbactividad" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/empleado"
+        android:id="@+id/lbempleado"
+        android:layout_alignBottom="@+id/lbFecha"
+        android:layout_alignLeft="@+id/lbtitulo"
+        android:layout_alignStart="@+id/lbtitulo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/horas"
+        android:id="@+id/lbhoras"
+        android:layout_alignTop="@+id/lbempleado"
+        android:layout_toRightOf="@+id/lbtitulo"
+        android:layout_toEndOf="@+id/lbtitulo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/elegir"
+        android:id="@+id/lbseleccionarFecha"
+        android:layout_alignBaseline="@+id/txtnombre_empl"
+        android:layout_alignBottom="@+id/txtnombre_empl"
+        android:layout_toLeftOf="@+id/btnfecha"
+        android:layout_alignLeft="@+id/lbFecha"
+        android:layout_alignStart="@+id/lbFecha" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnfecha"
+        android:src="@android:drawable/ic_input_add"
+        android:drawable="@color/abc_background_cache_hint_selector_material_light"
+        android:background="@android:color/transparent"
+        android:layout_below="@+id/lbFecha"
+        android:layout_toRightOf="@+id/lbdepartamento"
+        android:layout_toEndOf="@+id/lbdepartamento" />
+
+    <Spinner
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/Sp_horas"
+        android:layout_below="@+id/lbhoras"
+        android:layout_alignLeft="@+id/lbhoras"
+        android:layout_alignStart="@+id/lbhoras"
+        android:layout_alignBottom="@+id/Sp_minutos" />
+
+    <Spinner
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/Sp_minutos"
+        android:layout_below="@+id/lbhoras"
+        android:layout_toRightOf="@+id/Sp_horas"
+        android:layout_alignBottom="@+id/btnfecha" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/departamento"
+        android:id="@+id/lbdepartamento"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/btnfecha"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Sp_departamento"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbdepartamento"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/clientes"
+        android:id="@+id/lbclientes"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Sp_departamento"
+        android:layout_alignParentLeft="true" />
+
+    <Spinner
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Sp_clientes"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbclientes"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/actividad"
+        android:id="@+id/lbactividad"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Sp_clientes"
+        android:layout_alignParentLeft="true" />
+
+    <Spinner
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Sp_actividad"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbactividad"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/nomina"
+        android:id="@+id/lbnomina"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Sp_actividad"
+        android:layout_alignParentLeft="true" />
+
+    <Spinner
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/Sp_nomina"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbnomina"
+        android:layout_alignParentLeft="true"
+        android:clickable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/notas"
+        android:id="@+id/lbnotas"
+        android:layout_alignTop="@+id/lbdepartamento"
+        android:layout_toRightOf="@+id/Sp_departamento"
+        android:layout_toEndOf="@+id/Sp_departamento" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/listView"
+        android:layout_below="@+id/btnguardarDatos"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/txtid_em"
+        android:layout_below="@+id/lbnotas"
+        android:layout_alignParentLeft="true" />
+
+
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/guardar"
+        android:id="@+id/btnguardarDatos"
+        android:textSize="12sp"
+        android:onClick="btnguardar_eventoOnclick"
+        android:layout_marginTop="66dp"
+        android:layout_below="@+id/Sp_nomina"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtnombre_empl"
+        android:layout_alignTop="@+id/btnfecha"
+        android:layout_toLeftOf="@+id/lbhoras"
+        android:layout_toRightOf="@+id/btnfecha"
+        android:layout_toEndOf="@+id/btnfecha" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/txtdescripcion"
+        android:layout_toRightOf="@+id/Sp_departamento"
+        android:layout_toEndOf="@+id/Sp_departamento"
+        android:layout_alignBottom="@+id/Sp_nomina"
+        android:layout_below="@+id/lbdepartamento" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/TXTID_CLIENT"
+        android:layout_below="@+id/txtid_em"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Actualizar"
+        android:onClick="BtnActualizar"
+        android:id="@+id/btnActualizar"
+        android:hint="Boton para  Actualizar los datos"
+        android:textSize="12dp"
+        android:layout_alignTop="@+id/btnguardarDatos"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnfecha"
+        android:layout_alignEnd="@+id/btnfecha"
+        android:layout_above="@+id/listView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView10"
+        android:layout_below="@+id/listView"
+        android:layout_marginTop="29dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/TXTID_CLIENT"
+        android:layout_toEndOf="@+id/TXTID_CLIENT"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

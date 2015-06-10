@@ -1,0 +1,133 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.qbtiempo.qbtiempo.qbtiempo.Sincronizar">
+
+    <ListView
+        android:id="@+id/SCHEDULE"
+        android:layout_width="750dp"
+        android:layout_height="550dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbNombreEmpleado">
+    </ListView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SeleccionarTodos"
+        android:id="@+id/btnSeleccionarTodos"
+        android:onClick="BtnSeleccionarTodos"
+        android:layout_above="@+id/btnDeseleccionar"
+        android:layout_alignLeft="@+id/btnDeseleccionar"
+        android:layout_alignStart="@+id/btnDeseleccionar" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Deseleccionar"
+        android:id="@+id/btnDeseleccionar"
+        android:onClick="BtnDeseleccionar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/SCHEDULE"
+        android:layout_alignEnd="@+id/SCHEDULE" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+         android:text="@string/TituloSincronizar"
+        android:id="@+id/lbTituloSincronizar"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TraerDatos"
+        android:id="@+id/btnSincronizar"
+        android:onClick="BtnSincronizar"
+        android:layout_alignParentBottom="true"
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/nombrempleado"
+        android:id="@+id/lbNombreEmpleado"
+        android:textSize="13dp"
+        android:layout_below="@+id/lbTituloSincronizar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/act_registrada"
+        android:id="@+id/lbact_registrada"
+        android:textSize="13dp"
+        android:layout_alignBaseline="@+id/lbNombreEmpleado"
+        android:layout_alignBottom="@+id/lbNombreEmpleado"
+        android:layout_alignRight="@+id/lbTituloSincronizar"
+        android:layout_alignEnd="@+id/lbTituloSincronizar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/horas"
+        android:id="@+id/lbhoras"
+        android:textSize="13dp"
+        android:layout_alignTop="@+id/lbfecha"
+        android:layout_alignRight="@+id/btnSeleccionarTodos"
+        android:layout_alignEnd="@+id/btnSeleccionarTodos" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/fecha"
+        android:id="@+id/lbfecha"
+        android:textSize="13dp"
+        android:layout_below="@+id/lbTituloSincronizar"
+        android:layout_toLeftOf="@+id/textView9"
+        android:layout_toStartOf="@+id/textView9" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignTop="@+id/SCHEDULE"
+        android:layout_toLeftOf="@+id/lbact_registrada"
+        android:layout_toStartOf="@+id/lbact_registrada"
+        android:layout_marginTop="154dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView9"
+        android:layout_above="@+id/btnSeleccionarTodos"
+        android:layout_alignRight="@+id/btnSeleccionarTodos"
+        android:layout_alignEnd="@+id/btnSeleccionarTodos" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enviarDatos"
+        android:id="@+id/button2"
+        android:onClick="BtnEnviar"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnSincronizar"
+        android:layout_toEndOf="@+id/btnSincronizar"
+        android:layout_marginLeft="58dp"
+        android:layout_marginStart="58dp" />
+
+</RelativeLayout>

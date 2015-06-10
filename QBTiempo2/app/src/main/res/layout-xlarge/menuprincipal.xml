@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registro_actividades"
+        android:id="@+id/btnregistro"
+        android:layout_above="@+id/btnregistro_clases"
+        android:layout_alignLeft="@+id/btnregistro_clases"
+        android:layout_alignStart="@+id/btnregistro_clases"
+        android:layout_alignRight="@+id/btnregistro_clases"
+        android:layout_alignEnd="@+id/btnregistro_clases" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnregistro_clases"
+        android:id="@+id/btnregistro_clases"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <TextView
+        android:id="@+id/lbMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_above="@+id/btnregistro"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="32dp"
+        android:layout_toRightOf="@+id/lbMenu"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/txtnombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/txtid"
+        android:layout_below="@+id/txtid"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="12dp" />
+
+</RelativeLayout>
