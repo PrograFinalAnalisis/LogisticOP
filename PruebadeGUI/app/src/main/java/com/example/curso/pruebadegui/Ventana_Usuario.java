@@ -3,6 +3,7 @@ package com.example.curso.pruebadegui;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ public class Ventana_Usuario extends ActionBarActivity {
         private EditText campoHoraFinal;
         private Button button;
         public ArrayList<Cliente> listaUsuarios = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +42,16 @@ public class Ventana_Usuario extends ActionBarActivity {
             Integer hf = Integer.parseInt(Hfinal);
             Cliente cliente = new Cliente(hi,hf,nombre);
             listaUsuarios.add(cliente);
+                Log.e("MENSAJE: ", "---------------------->se agrego el usuario");
             }
         });
     }
+
+    public ArrayList<Cliente> obtenerListaUsuarios(){
+        return  listaUsuarios;
+
+    }
+
 
 
     @Override

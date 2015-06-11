@@ -105,10 +105,12 @@ public class Ventana_Principal extends ActionBarActivity {
 
  // Boton ver paquetes y usuarios
     public void onClickConsulta(View view){
-        Intent intent = new Intent(Ventana_Principal.this,Ventana_Agregar_Paquete.class);
+        Intent intent = new Intent(Ventana_Principal.this,Ventana_Consultas.class);
         startActivity(intent);
 
 
     }
+
+
 
 }

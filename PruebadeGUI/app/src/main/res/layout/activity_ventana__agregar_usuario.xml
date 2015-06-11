@@ -87,8 +87,7 @@
         android:id="@+id/buttonAgergarCliente"
         android:onClick="onClick"
         android:layout_below="@+id/editHfinal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
