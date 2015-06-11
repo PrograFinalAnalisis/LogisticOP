@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PruebadeGUI</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_ventana__principal">Ventana_Principal</string>
+    <string name="title_activity_ventana__escoger__cliente">Ventana_Escoger_Cliente</string>
+    <string name="title_activity_ventana__codigo__producto">Ventana_Codigo_Producto</string>
+    <string name="title_activity_ventana__usuario">Ventana_Usuario</string>
+    <string name="title_activity_ventana__agregar__paquete">Ventana_Agregar_Paquete</string>
+    <string name="title_activity_prueba">Prueba</string>
+</resources>
