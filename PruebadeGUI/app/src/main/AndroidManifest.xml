@@ -40,6 +40,10 @@
             android:name=".Ventana_Consultas"
             android:label="@string/title_activity_ventana__consultas" >
         </activity>
+        <activity
+            android:name=".Ventana_Informacion_Envio"
+            android:label="@string/title_activity_ventana__informacion__envio" >
+        </activity>
     </application>
 
 </manifest>

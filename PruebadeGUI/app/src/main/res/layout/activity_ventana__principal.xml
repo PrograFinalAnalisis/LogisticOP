@@ -4,17 +4,18 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.curso.pruebadegui.Ventana_Principal">
+    tools:context="com.example.curso.pruebadegui.Ventana_Principal"
+    android:id="@+id/">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Agregar Paquete"
         android:id="@+id/button2"
-        android:layout_above="@+id/button5"
         android:onClick="onClickPaquete"
+        android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginTop="47dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,10 +23,10 @@
         android:text="Preparar pedido"
         android:id="@+id/button3"
         android:onClick="onClickPedido"
-        android:layout_below="@+id/button4"
+        android:layout_below="@+id/button2"
         android:layout_alignRight="@+id/button2"
         android:layout_alignEnd="@+id/button2"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="55dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -33,9 +34,9 @@
         android:text="Enviar pedido"
         android:id="@+id/button4"
         android:onClick="onClickEnviar"
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp" />
+        android:layout_marginTop="40dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -43,10 +44,10 @@
         android:text="Agregar Usuario"
         android:id="@+id/button"
         android:onClick="onClickUsuario"
+        android:layout_marginTop="43dp"
         android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignStart="@+id/button3"
-        android:layout_marginTop="53dp" />
+        android:layout_alignRight="@+id/button3"
+        android:layout_alignEnd="@+id/button3" />
 
     <Button
         android:layout_width="wrap_content"
@@ -54,9 +55,9 @@
         android:text="Ver paquetes y Usuarios"
         android:id="@+id/button5"
         android:onClick="onClickConsulta"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/button4"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp" />
+        android:layout_marginTop="57dp" />
 
     <TextView
         android:layout_width="wrap_content"

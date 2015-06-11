@@ -4,27 +4,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-import java.util.ArrayList;
-
-
-public class Ventana_Consultas extends ActionBarActivity {
-
+public class Ventana_Informacion_Envio extends ActionBarActivity {
     private String[] colores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ventana__consultas);
-        //Mostrar Datos(Establecer cantidad de columnas al GridView en la ventana activity)
+        setContentView(R.layout.activity_ventana__informacion__envio);
+        //Mostrar datos (Establecer cantidad de columnas al GridView en la ventana activity)
         //Arreglo de prueba
         colores = new String []{"Rojo","Verde","Azul","Amarillo","Naranja"};
         ArrayAdapter<String> adapter;
@@ -33,21 +24,12 @@ public class Ventana_Consultas extends ActionBarActivity {
         GridView lv = (GridView) findViewById(R.id.gridView);
         lv.setAdapter(adapter);
 
-        //gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            //@Override
-            /*public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        ((TextView)view).getText(),
-                        Toast.LENGTH_SHORT).show();
-            }});*/
-
-            }
-
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ventana__consultas, menu);
+        getMenuInflater().inflate(R.menu.menu_ventana__informacion__envio, menu);
         return true;
     }
 

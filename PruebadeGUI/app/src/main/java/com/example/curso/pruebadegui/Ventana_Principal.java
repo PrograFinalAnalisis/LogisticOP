@@ -84,7 +84,7 @@ public class Ventana_Principal extends ActionBarActivity {
     }
 //Boton enviar
     public void onClickEnviar(View view){
-        Intent intent = new Intent(Ventana_Principal.this,Ventana_Escoger_Cliente.class);
+        Intent intent = new Intent(Ventana_Principal.this,Ventana_Informacion_Envio.class);
         startActivity(intent);
 
     }
