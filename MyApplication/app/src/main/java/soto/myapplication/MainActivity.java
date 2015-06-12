@@ -28,14 +28,14 @@ public class MainActivity extends Activity implements OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Se Instancia el botón de Scan
+        //Se Instancia el botï¿½n de Scan
         scanBtn = (Button)findViewById(R.id.scan_button);
-        //Se Instancia el Campo de Texto para el nombre del formato de código de barra
+        //Se Instancia el Campo de Texto para el nombre del formato de cï¿½digo de barra
         formatTxt = (TextView)findViewById(R.id.scan_format);
-        //Se Instancia el Campo de Texto para el contenido  del código de barra
+        //Se Instancia el Campo de Texto para el contenido  del cï¿½digo de barra
         contentTxt = (TextView)findViewById(R.id.scan_content);
-        //Se agrega la clase MainActivity.java como Listener del evento click del botón de Scan
-        scanBtn.setOnClickListener(this);    }
+        //Se agrega la clase MainActivity.java como Listener del evento click del botï¿½n de Scan
+            scanBtn.setOnClickListener(this);    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,10 +76,10 @@ public class MainActivity extends Activity implements OnClickListener {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
             //Quiere decir que se obtuvo resultado pro lo tanto:
-            //Desplegamos en pantalla el contenido del código de barra scaneado
+            //Desplegamos en pantalla el contenido del cï¿½digo de barra scaneado
             String scanContent = scanningResult.getContents();
             contentTxt.setText("Contenido: " + scanContent);
-            //Desplegamos en pantalla el nombre del formato del código de barra scaneado
+            //Desplegamos en pantalla el nombre del formato del cï¿½digo de barra scaneado
             String scanFormat = scanningResult.getFormatName();
             formatTxt.setText("Formato: " + scanFormat);
         }else{

@@ -18,7 +18,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText9"
+        android:id="@+id/editNombreCliente"
         android:layout_marginTop="90dp"
         android:layout_below="@+id/textView13"
         android:layout_alignParentLeft="true"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Escoger cliente"
-        android:id="@+id/button9"
+        android:id="@+id/buttonEscogerCliente"
         android:onClick="onClickEscoger"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

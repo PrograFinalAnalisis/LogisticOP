@@ -4,16 +4,31 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 public class Ventana_Escoger_Cliente extends ActionBarActivity {
+
+    private EditText nombreCliente;
+    private Button buttonCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventana__escoger__cliente);
-    }
+        buttonCliente= (Button) findViewById(R.id.buttonEscogerCliente);
+        buttonCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nombreCliente = (EditText) findViewById(R.id.editNombreCliente);
+                String nombre= nombreCliente.getText().toString();
 
+
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
