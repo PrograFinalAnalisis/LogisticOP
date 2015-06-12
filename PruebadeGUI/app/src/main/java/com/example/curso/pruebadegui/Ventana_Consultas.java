@@ -18,6 +18,12 @@ import java.util.ArrayList;
 public class Ventana_Consultas extends ActionBarActivity {
 
     private String[] colores;
+    Cliente cliente1 = new Cliente(8,13,"MeliLeDaIgual");
+    Cliente cliente2 = new Cliente(7,14,"NelsonPapiRin");
+    Cliente cliente3 = new Cliente(8,12,"Asoto");
+    Cliente cliente4 = new Cliente(9,15,"Fuffy :3");
+    ListaClientes listaClientes = new ListaClientes();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +32,14 @@ public class Ventana_Consultas extends ActionBarActivity {
         setContentView(R.layout.activity_ventana__consultas);
         //Mostrar Datos(Establecer cantidad de columnas al GridView en la ventana activity)
         //Arreglo de prueba
-        colores = new String []{"Rojo","Verde","Azul","Amarillo","Naranja"};
-        ArrayAdapter<String> adapter;
+        //colores = new String []{"Rojo","Verde","Azul","Amarillo","Naranja"};
+        listaClientes.add(cliente1);
+        listaClientes.add(cliente2);
+        listaClientes.add(cliente3);
+        listaClientes.add(cliente4);
+        ArrayAdapter<Cliente> adapter;
 
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,colores);
+        adapter = new ArrayAdapter<Cliente>(this,android.R.layout.simple_list_item_1,listaClientes);
         GridView lv = (GridView) findViewById(R.id.gridView);
         lv.setAdapter(adapter);
 

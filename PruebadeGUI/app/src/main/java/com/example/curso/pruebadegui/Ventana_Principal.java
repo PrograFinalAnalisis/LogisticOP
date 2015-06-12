@@ -14,11 +14,6 @@ import java.util.Objects;
 public class Ventana_Principal extends ActionBarActivity {
 
 
-    Cliente cliente1 = new Cliente(8,13,"MeliLeDaIgual");
-    Cliente cliente2 = new Cliente(7,14,"NelsonPapiRin");
-    Cliente cliente3 = new Cliente(8,12,"Asoto");
-    Cliente cliente4 = new Cliente(9,15,"Fuffy :3");
-    ListaClientes listaClientes = new ListaClientes();
 
 
     Paquete paquete1 = new Paquete(1,20,30,60);
@@ -36,10 +31,10 @@ public class Ventana_Principal extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventana__principal);
 
-        listaClientes.add(cliente1);
-        listaClientes.add(cliente2);
-        listaClientes.add(cliente3);
-        listaClientes.add(cliente4);
+        //listaClientes.add(cliente1);
+        //listaClientes.add(cliente2);
+        //listaClientes.add(cliente3);
+        //listaClientes.add(cliente4);
        /*
         listaPaquetes.add(paquete1);
         listaPaquetes.add(paquete2);
@@ -75,10 +70,10 @@ public class Ventana_Principal extends ActionBarActivity {
 // Boton agregar usuario
     public void onClickUsuario(View view){
         Intent intent = new Intent(Ventana_Principal.this,Ventana_Usuario.class);
-        Bundle contenedor = new Bundle();
-        contenedor.putParcelable("array",listaClientes);
+        //Bundle contenedor = new Bundle();
+        //contenedor.putParcelable("array",listaClientes);
 
-        intent.putExtras(contenedor);
+        //intent.putExtras(contenedor);
 
         startActivity(intent);
 

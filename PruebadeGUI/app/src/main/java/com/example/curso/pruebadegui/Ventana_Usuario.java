@@ -44,9 +44,11 @@ public class Ventana_Usuario extends ActionBarActivity {
                 Cliente cliente = new Cliente(hi,hf,nombre);
                 Bundle contenedor = getIntent().getExtras();
                 ListaClientes listaClientes = contenedor.getParcelable("array");
-                listaClientes.add(cliente);
+                Intent in = new Intent(Ventana_Usuario.this,Ventana_Principal.class);
+                startActivity(in);
+                //listaClientes.add(cliente);
 
-            Log.e("MENSAJE: ", "---------------------->se agrego el usuario");
+            //Log.e("MENSAJE: ", "---------------------->se agrego el usuario");
             }
         });
     }
