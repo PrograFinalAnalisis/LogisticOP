@@ -11,15 +11,23 @@ package proyectofinalanalisis;
  */
 public class caja 
 {
-    public int base = 0;
-    public int altura = 0;
-    public int profundidad = 0;
     
-    public caja(int pBase, int pAltura, int pProfundidad)
+    public int base;
+    public int altura;
+    public int profundidad;
+    public int idCliente;
+    public int volumen;
+    public boolean seleccionada = false;
+    public boolean guardada = false;
+    
+    
+    public caja(int pProfundidad, int pAltura, int pBase, int pIdCliente)
     {
         this.base = pBase;
         this.altura = pAltura;
         this.profundidad = pProfundidad;
+        this.idCliente = pIdCliente;
+        this.volumen = base * altura * profundidad;
     }
     
     public void rotarCaja()
