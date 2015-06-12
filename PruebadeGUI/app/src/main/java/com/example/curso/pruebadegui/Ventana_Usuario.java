@@ -21,35 +21,34 @@ public class Ventana_Usuario extends ActionBarActivity {
         private EditText campoHoraInicio;
         private EditText campoHoraFinal;
         private Button button;
-        public ArrayList<Cliente> listaUsuarios = new ArrayList<>();
+        //public ArrayList<Cliente> listaUsuarios = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventana__agregar_usuario);
-
-        campoNombre = (EditText) findViewById(R.id.editNombre);
-        campoHoraInicio= (EditText) findViewById(R.id.editHinicio);
-        campoHoraFinal= (EditText) findViewById(R.id.editHfinal);
         button= (Button) findViewById(R.id.buttonAgergarCliente);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String nombre = campoNombre.getText().toString();
-            String Hinico = campoHoraInicio.getText().toString();
-            String Hfinal = campoHoraFinal.getText().toString();
-            Integer hi = Integer.parseInt(Hinico);
-            Integer hf = Integer.parseInt(Hfinal);
-            Cliente cliente = new Cliente(hi,hf,nombre);
-            listaUsuarios.add(cliente);
-                Log.e("MENSAJE: ", "---------------------->se agrego el usuario");
+                campoNombre = (EditText) findViewById(R.id.editNombre);
+                campoHoraInicio= (EditText) findViewById(R.id.editHinicio);
+                campoHoraFinal= (EditText) findViewById(R.id.editHfinal);
+
+                String nombre = campoNombre.getText().toString();
+                String Hinico = campoHoraInicio.getText().toString();
+                String Hfinal = campoHoraFinal.getText().toString();
+                Integer hi = Integer.parseInt(Hinico);
+                Integer hf = Integer.parseInt(Hfinal);
+                Cliente cliente = new Cliente(hi,hf,nombre);
+                Bundle contenedor = getIntent().getExtras();
+                ListaClientes listaClientes = contenedor.getParcelable("array");
+                listaClientes.add(cliente);
+
+            Log.e("MENSAJE: ", "---------------------->se agrego el usuario");
             }
         });
-    }
-
-    public ArrayList<Cliente> obtenerListaUsuarios(){
-        return  listaUsuarios;
-
     }
 
 
