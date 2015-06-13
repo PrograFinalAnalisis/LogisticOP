@@ -16,7 +16,7 @@ import java.util.Objects;
 
 
 public class Ventana_Usuario extends ActionBarActivity {
-
+        //Variables para cargar lo que escriba el cliente
         private EditText campoNombre;
         private EditText campoHoraInicio;
         private EditText campoHoraFinal;
@@ -27,7 +27,8 @@ public class Ventana_Usuario extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventana__agregar_usuario);
-        button= (Button) findViewById(R.id.buttonAgergarCliente);
+        button= (Button) findViewById(R.id.buttonAgergarCliente); //R.id.buttonAgergarCliente el boton que se esta usando
+                                                                  // buttonAgergarCliente es el id del boton que esta en el xml                                                                 //
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

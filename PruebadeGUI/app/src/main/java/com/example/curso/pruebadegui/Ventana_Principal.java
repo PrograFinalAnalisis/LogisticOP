@@ -12,20 +12,8 @@ import java.util.Objects;
 
 
 public class Ventana_Principal extends ActionBarActivity {
-    Cliente cliente1 = new Cliente(8,13,"MeliLeDaIgual");
-    Cliente cliente2 = new Cliente(7,14,"NelsonPapiRin");
-    Cliente cliente3 = new Cliente(8,12,"Asoto");
-    Cliente cliente4 = new Cliente(9,15,"Fuffy :3");
-    ListaClientes listaClientes = new ListaClientes();
 
-
-
-
-    Paquete paquete1 = new Paquete(1,20,30,60);
-    Paquete paquete2 = new Paquete(2,60,30,10);
-    Paquete paquete3 = new Paquete(3,20,45,60);
-    Paquete paquete4 = new Paquete(4,10,100,10);
-    Paquete paquete5 = new Paquete(5,20,30,60);
+    //Este es el objeto de la clase principal
 
 
 
@@ -36,17 +24,7 @@ public class Ventana_Principal extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventana__principal);
 
-        listaClientes.add(cliente1);
-        listaClientes.add(cliente2);
-        listaClientes.add(cliente3);
-        listaClientes.add(cliente4);
-       /*
-        listaPaquetes.add(paquete1);
-        listaPaquetes.add(paquete2);
-        listaPaquetes.add(paquete3);
-        listaPaquetes.add(paquete4);
-        listaPaquetes.add(paquete5);
-        */
+
     }
 
 
@@ -74,29 +52,26 @@ public class Ventana_Principal extends ActionBarActivity {
 
 // Boton agregar usuario
     public void onClickUsuario(View view){
+        //Este es el codigo para que al momento de tocar un boton cambien de Actividad (Pantalla) en este caso la pantalla
+        // de agregar nuevo Usuario
         Intent intent = new Intent(Ventana_Principal.this,Ventana_Usuario.class);
-        Bundle contenedor = new Bundle();
-        contenedor.putParcelable("array",listaClientes);
-
-        intent.putExtras(contenedor);
-
         startActivity(intent);
 
     }
-//Boton enviar
+//Boton enviar, nos manda a la pantalla donde se ejecutara el codigo de Adrian y se desplegara la información
     public void onClickEnviar(View view){
         Intent intent = new Intent(Ventana_Principal.this,Ventana_Informacion_Envio.class);
         startActivity(intent);
 
     }
 
-// Boton preparar pedido
+// Boton preparar pedido,Nos lleva a la ventana para escoger el cliente
     public void onClickPedido(View view){
-        Intent intent = new Intent(Ventana_Principal.this,Ventana_Codigo_Producto.class);
+        Intent intent = new Intent(Ventana_Principal.this,Ventana_Escoger_Cliente.class);
         startActivity(intent);
 
     }
-// Boton agregar paquete
+// Boton agregar paquete, Ventana para agregar paquetes nuevos
     public void onClickPaquete(View view){
         Intent intent = new Intent(Ventana_Principal.this,Ventana_Agregar_Paquete.class);
         //intent.putExtra("listaP",listaPaquetes);
@@ -104,7 +79,7 @@ public class Ventana_Principal extends ActionBarActivity {
 
     }
 
- // Boton ver paquetes y usuarios
+ // Boton ver paquetes y usuarios, ventana para ver los resultados de cliente x paquete
     public void onClickConsulta(View view){
         Intent intent = new Intent(Ventana_Principal.this,Ventana_Consultas.class);
         startActivity(intent);
