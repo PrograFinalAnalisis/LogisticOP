@@ -21,7 +21,7 @@ public class Ventana_Usuario extends ActionBarActivity {
         private EditText campoHoraInicio;
         private EditText campoHoraFinal;
         private Button button;
-        //public ArrayList<Cliente> listaUsuarios = new ArrayList<>();
+        public ArrayList<Cliente> listaClientes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +43,7 @@ public class Ventana_Usuario extends ActionBarActivity {
                 Integer hi = Integer.parseInt(Hinico);
                 Integer hf = Integer.parseInt(Hfinal);
                 Cliente cliente = new Cliente(hi,hf,nombre);
-                Bundle contenedor = getIntent().getExtras();
-                ListaClientes listaClientes = contenedor.getParcelable("array");
-                Intent in = new Intent(Ventana_Usuario.this,Ventana_Principal.class);
-                startActivity(in);
-                //listaClientes.add(cliente);
+                listaClientes.add(cliente);
 
             //Log.e("MENSAJE: ", "---------------------->se agrego el usuario");
             }

@@ -53,7 +53,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Hora de finalización:"
         android:id="@+id/textView7"
-        android:layout_marginTop="53dp"
         android:layout_below="@+id/editHinicio"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
