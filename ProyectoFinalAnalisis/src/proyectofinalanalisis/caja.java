@@ -15,18 +15,18 @@ public class caja
     public int base;
     public int altura;
     public int profundidad;
-    public int idCliente;
+    public cliente cliente;
     public int volumen;
     public boolean seleccionada = false;
     public boolean guardada = false;
     
     
-    public caja(int pProfundidad, int pAltura, int pBase, int pIdCliente)
+    public caja(int pProfundidad, int pAltura, int pBase, cliente pCliente)
     {
         this.base = pBase;
         this.altura = pAltura;
         this.profundidad = pProfundidad;
-        this.idCliente = pIdCliente;
+        this.cliente = pCliente;
         this.volumen = base * altura * profundidad;
     }
     

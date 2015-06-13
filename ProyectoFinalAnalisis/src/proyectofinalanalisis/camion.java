@@ -19,13 +19,14 @@ public class camion
     public int profundidad;
     public int volumenTotal;
     public int volumenGastado;
+    public int idCamion;
     ////////////////////////////////////////////
     //Variables externas////
     public caja listaCajas[];
-    public ArrayList <Integer> listaClientesAVisitar;
+    public ArrayList <cliente> listaClientesAVisitar;
     
     
-    public camion(int pProfundidad, int pAltura, int pBase)
+    public camion(int pProfundidad, int pAltura, int pBase, int pIdCamion)
     {
         this.base = pBase;
         this.altura = pAltura;
@@ -33,6 +34,8 @@ public class camion
         
         this.volumenTotal = pBase * pAltura* pProfundidad;
         this.volumenGastado = 0;
+        
+        this.idCamion = pIdCamion;
         
         this.listaClientesAVisitar =  new ArrayList();
     }
@@ -64,9 +67,9 @@ public class camion
         {
             volumenGastado += pCaja.volumen;
             pCaja.guardada = true;
-            if(!listaClientesAVisitar.contains(pCaja.idCliente))
+            if(!listaClientesAVisitar.contains(pCaja.cliente))
             {
-                listaClientesAVisitar.add(pCaja.idCliente);
+                listaClientesAVisitar.add(pCaja.cliente);
             }
         }
         else
@@ -79,7 +82,7 @@ public class camion
     {
         for(int i=0;i<listaClientesAVisitar.size();i++)
         {
-            System.out.println("Visita Cliente " + listaClientesAVisitar.get(i));
+            System.out.println("Visita Cliente " + listaClientesAVisitar.get(i).idCliente + " a las " +listaClientesAVisitar.get(i).horaInicioEntrega );
         }
     }
     
