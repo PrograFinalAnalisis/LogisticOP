@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <!-- Se muestra el color verde en este caso al ser presionado  -->
+            <gradient android:angle="270" android:endColor="#c5ff7b" android:startColor="#ccff78" />
+            <!-- Aumento el borde agregando mas color del blanco  -->
+            <stroke android:width="3dp" android:color="#f3ffe5" />
+            <corners android:radius="3dp" />
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
+        </shape>
+        <!-- este metodo hace el efecto de presionado -->
+    </item>
+
+    <item android:state_focused="true">
+        <shape>
+            <solid android:color="#67d2c8" />
+            <!--si el focus esta activo -->
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+
+            <!-- por motivos de presentacion hago el fondo transparente con las
+            propiedades que da android -->
+            <gradient android:angle="270" android:endColor="@android:color/transparent" android:startColor="@android:color/transparent" />
+            <!-- Defino el colpor del borde blanco  -->
+            <stroke android:width="2dp" android:color="#f9ffef" />
+            <corners android:radius="3dp" />
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
+        </shape>
+
+    </item>
+
+</selector>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/green1">
+
+
+    <Button
+
+        android:id="@+id/btnregistro"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:textSize="18dp"
+        android:drawableTop="@drawable/ic_account_circle_black_48dp"
+        android:text="@string/registro_actividades"
+        android:background="@drawable/presionado"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp" />
+
+    <Button
+
+        android:id="@+id/btnregistro_clases"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:textSize="18dp"
+        android:drawableTop="@drawable/ic_account_multiple_black_48dp"
+        android:text="@string/btnregistro_clases"
+        android:background="@drawable/presionado"
+        android:layout_alignTop="@+id/btnregistro"
+        android:layout_toRightOf="@+id/btnregistro"
+        android:layout_toEndOf="@+id/btnregistro"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp" />
+
+
+    <TextView
+        android:id="@+id/lbMenu"
+        style="@style/Header"
+        android:fontFamily=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:textSize="45dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="91dp"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:id="@+id/btnSincr"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:textSize="18dp"
+        android:drawableTop="@drawable/ic_arrange_send_backward_black_48dp"
+        android:text="@string/sincronizar"
+        android:background="@drawable/presionado"
+        android:layout_alignTop="@+id/btnActualizar"
+        android:layout_toLeftOf="@+id/btnregistro_clases"
+        android:layout_toStartOf="@+id/btnregistro_clases" />
+
+    <Button
+
+        android:id="@+id/btnActualizar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:textSize="18dp"
+        android:text="Actualizar Datos"
+        android:drawableTop="@drawable/ic_sync_black_48dp"
+        android:background="@drawable/presionado"
+        android:layout_below="@+id/btnregistro_clases"
+        android:layout_marginTop="30dp"
+        android:layout_alignLeft="@+id/btnregistro_clases"
+        android:layout_alignStart="@+id/btnregistro_clases"
+        android:layout_alignRight="@+id/btnregistro_clases"
+        android:layout_alignEnd="@+id/btnregistro_clases" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@android:color/transparent"
+        android:gravity="left"
+        android:elevation="20dp"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:id="@+id/txtbienvenida"
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenido Usuario"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:layout_marginBottom="22dp"
+            android:layout_above="@+id/txtid"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <TextView
+            android:id="@+id/txtcodusuario"
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Num Usuario :"
+            android:textSize="20dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginLeft="123dp"
+            android:layout_marginStart="123dp"
+            android:layout_alignBaseline="@+id/txtid"
+            android:layout_alignBottom="@+id/txtid"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/textView11"
+            style="@style/Header"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/txtcodusuario"
+            android:layout_alignLeft="@+id/txtcodusuario"
+            android:layout_alignRight="@+id/txtcodusuario"
+            android:layout_alignStart="@+id/txtcodusuario"
+            android:layout_below="@+id/txtcodusuario"
+            android:layout_toStartOf="@+id/txtnombre"
+            android:text="Nombre         :"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <TextView
+            android:id="@+id/txtid"
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="kkkk"
+            android:textSize="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="left"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/txtnombre"
+            android:layout_alignStart="@+id/txtnombre" />
+
+        <TextView
+            android:id="@+id/txtnombre"
+            style="@style/Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_below="@+id/txtcodusuario"
+            android:layout_toRightOf="@+id/txtcodusuario"
+            android:layout_toEndOf="@+id/txtcodusuario" />
+
+    </RelativeLayout>
+</RelativeLayout>
