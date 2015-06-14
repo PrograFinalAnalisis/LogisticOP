@@ -62,19 +62,19 @@ public class Settings extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.configuracion);
+//        setContentView(R.layout.configuracion);
         updateBarHandler = new Handler();
 
-        textIP = (TextView) findViewById(R.id.txthost);
-        textPuerto = (TextView) findViewById(R.id.txtpuerto);
+  //      textIP = (TextView) findViewById(R.id.txthost);
+   //     textPuerto = (TextView) findViewById(R.id.txtpuerto);
         textContrasena = (TextView) findViewById(R.id.txtpass);
-        textUsuario = (TextView) findViewById(R.id.txtusuario);
-        textCatalogo = (TextView) findViewById(R.id.txtbase);
-        buttonProbarConexion = (Button) findViewById(R.id.btntestconec);
-        btnsincronizar = (Button) findViewById(R.id.btnsinc);
-        btnguardar_configuracion = (Button) findViewById(R.id.btnsavepref);
-        btnCargar_Preferencias = (Button) findViewById(R.id.btncargar_prefe);
-        txterror = (TextView) findViewById(R.id.txterror);
+    //    textUsuario = (TextView) findViewById(R.id.txtusuario);
+     //   textCatalogo = (TextView) findViewById(R.id.txtbase);
+      //  buttonProbarConexion = (Button) findViewById(R.id.btntestconec);
+   //     btnsincronizar = (Button) findViewById(R.id.btnsinc);
+  //      btnguardar_configuracion = (Button) findViewById(R.id.btnsavepref);
+  //      btnCargar_Preferencias = (Button) findViewById(R.id.btncargar_prefe);
+  //      txterror = (TextView) findViewById(R.id.txterror);
         // progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         dialog = new ProgressDialog(this);
@@ -144,27 +144,8 @@ public class Settings extends ActionBarActivity {
     }
 
 
-    public void conectar2() {
-
-
-        try {
-
-            java.sql.Connection connMySQL = null;
-
-            StrictMode.ThreadPolicy tp = StrictMode.ThreadPolicy.LAX;
-            //StrictMode.setThreadPolicy(tp);
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
-
-
-            Toast.makeText(getApplicationContext(),
-                    "conecta: ",
-                    Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-
-            Toast.makeText(getApplicationContext(),
-                    "Error: " + e.getMessage(),
-                    Toast.LENGTH_SHORT).show();
-        }
+    public void conectar2()
+    {
     }
     public void terminar(View v){
         Intent broadcastIntent = new Intent();
@@ -215,8 +196,9 @@ public class Settings extends ActionBarActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+    //    getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -262,10 +244,11 @@ public class Settings extends ActionBarActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
 
         int id = item.getItemId();
-        if (id == R.id.menu_crear) {
+        if (true) {
             Intent intent = null;
             intent = new Intent(Settings.this, Settings.class);
             startActivity(intent);

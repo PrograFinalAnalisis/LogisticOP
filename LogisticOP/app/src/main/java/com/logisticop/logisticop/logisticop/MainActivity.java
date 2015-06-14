@@ -55,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         iv = (ImageView) findViewById(R.id.imageView2);
         txt1 = (TextView) findViewById(R.id.lbversion);
-        txt2 = (TextView) findViewById(R.id.textView2);
+       // txt2 = (TextView) findViewById(R.id.textView2);
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
         txtclave = (EditText) findViewById(R.id.txtpass);
         Sp_Usuarios = (Spinner) findViewById(R.id.SP_usuarios);
@@ -127,9 +127,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
     public void createBaseDatos() {
@@ -142,7 +143,8 @@ public class MainActivity extends ActionBarActivity {
                     " Nombre text, Apellido1 text," +
                     " Apellido2 text , NombreCompleto text, Clave text);");
 
-            db.execSQL("create table IF NOT EXISTS clientes(_id integer primary key, Nombre text,horaInicio integer, horaFin integer);");
+
+            db.execSQL("create table IF NOT EXISTS clientes(_id integer primary key AUTOINCREMENT, Nombre text,horaInicio integer, horaFin integer);");
 
             db.execSQL("create table IF NOT EXISTS caja(_id integer primary key, Nombre_Producto text,Base integer, Altura integer, Profundidad integer);");
 
@@ -263,7 +265,8 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_crear) {
+        if (true)
+        {
             Intent intent = null;
             intent = new Intent(MainActivity.this, Settings.class);
             startActivity(intent);

@@ -17,7 +17,7 @@ public class TablaCaja
     public static final String KEY_Profundidad = "Profundidad";
 
     public static final String DATABASE_CREATE_CAJA = "create table IF NOT EXISTS "+ DATABASE_TABLE_caja +"" +
-            "("+ KEY_ROWID +" integer primary key AUTOINCREMENT, " +
+            "("+ KEY_ROWID +" integer primary key, " +
             "  "+ KEY_Nombre_Producto + " text, "+ KEY_Base + " integer," +
             " "+ KEY_Altura +" integer , "+ KEY_Profundidad + " integer);";
 

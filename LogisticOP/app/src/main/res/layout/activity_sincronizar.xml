@@ -14,10 +14,9 @@
         android:id="@+id/SCHEDULE"
         android:layout_width="750dp"
         android:layout_height="550dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbNombreEmpleado"
-        android:layout_above="@+id/btnSincronizar">
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/lbNombreEmpleado">
     </ListView>
 
     <Button
@@ -36,71 +35,41 @@
         android:id="@+id/lbTituloSincronizar"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/TraerDatos"
-        android:id="@+id/btnSincronizar"
-        android:onClick="BtnMisActividades"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/presionado"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:textSize="21dp"
-        android:layout_alignRight="@+id/lbact_registrada"
-        android:layout_alignEnd="@+id/lbact_registrada"
-        android:layout_above="@+id/btnDeseleccionar" />
 
     <TextView
         style="@style/HeaderOtro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/nombrempleado"
         android:id="@+id/lbNombreEmpleado"
+        android:text="Codigo"
         android:layout_below="@+id/lbTituloSincronizar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/lbclientes"
+        android:layout_alignEnd="@+id/lbclientes" />
 
     <TextView
         style="@style/HeaderOtro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/act_registrada"
+        android:text="Nombre Producto"
         android:id="@+id/lbact_registrada"
-        android:layout_alignBaseline="@+id/lbNombreEmpleado"
-        android:layout_alignBottom="@+id/lbNombreEmpleado"
-        android:layout_alignRight="@+id/lbTituloSincronizar"
-        android:layout_alignEnd="@+id/lbTituloSincronizar" />
-
-    <TextView
-        style="@style/HeaderOtro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/horas"
-        android:id="@+id/lbhoras"
         android:layout_above="@+id/SCHEDULE"
-        android:layout_alignRight="@+id/SCHEDULE"
-        android:layout_alignEnd="@+id/SCHEDULE"
-        android:layout_marginRight="24dp"
-        android:layout_marginEnd="24dp" />
+        android:layout_toRightOf="@+id/textView9"
+        android:layout_toEndOf="@+id/textView9"
+        android:layout_marginLeft="41dp"
+        android:layout_marginStart="41dp" />
 
     <TextView
         style="@style/HeaderOtro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/fecha"
+        android:text="Cantidad de Cajas"
         android:id="@+id/lbfecha"
-        android:layout_above="@+id/SCHEDULE"
-        android:layout_toRightOf="@+id/lbact_registrada"
-        android:layout_toEndOf="@+id/lbact_registrada"
-        android:layout_marginLeft="37dp"
-        android:layout_marginStart="37dp" />
+        android:layout_alignTop="@+id/lbact_registrada"
+        android:layout_alignRight="@+id/SCHEDULE"
+        android:layout_alignEnd="@+id/SCHEDULE" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -120,46 +89,56 @@
         android:visibility="invisible"
         android:layout_above="@+id/btnDeseleccionar" />
 
+    <TextView
+        android:id="@+id/lbclientes"
+        style="@style/Header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/clientes"
+        android:textAlignment="gravity"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="21dp"
+        android:textStyle="bold"
+        android:layout_above="@+id/textView9"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="55dp" />
+
+    <Spinner
+        android:id="@+id/Sp_clientes"
+        style="@style/holoSpinnerStyle"
+        android:layout_width="350dp"
+        android:layout_height="75dp"
+        android:layout_alignBottom="@+id/lbclientes"
+        android:layout_alignRight="@+id/SCHEDULE" />
+
+
+
     <Button
         android:layout_width="95dp"
         android:layout_height="45dp"
-        android:text="@string/enviarDatos"
+        android:text="Guardar"
         android:id="@+id/button2"
         android:onClick="BtnEnviar"
         android:background="@drawable/presionado"
         android:textSize="21dp"
-        android:layout_alignTop="@+id/btnTodas"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/btnEnviarTodas"
-        android:layout_alignStart="@+id/btnEnviarTodas" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/lbfecha"
+        android:layout_alignStart="@+id/lbfecha"
+        android:layout_alignRight="@+id/SCHEDULE"
+        android:layout_alignEnd="@+id/SCHEDULE" />
 
     <Button
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:text="@string/traertodos"
+        android:text="Escanear codigo"
         android:id="@+id/btnTodas"
         android:onClick="BtnTodasActividades"
         android:background="@drawable/presionado"
         android:textSize="21dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnSincronizar"
-        android:layout_alignStart="@+id/btnSincronizar"
-        android:layout_toLeftOf="@+id/lbfecha"
-        android:layout_toStartOf="@+id/lbfecha" />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="45dp"
-        android:text="@string/btnenviarTodas"
-        android:id="@+id/btnEnviarTodas"
-        android:onClick="enviarTodasAct"
-        android:background="@drawable/presionado"
-        android:textSize="21dp"
-        android:layout_below="@+id/SCHEDULE"
-        android:layout_alignRight="@+id/SCHEDULE"
-        android:layout_alignEnd="@+id/SCHEDULE"
-        android:layout_alignLeft="@+id/lbfecha"
-        android:layout_alignStart="@+id/lbfecha" />
+        android:layout_alignRight="@+id/btnDeseleccionar"
+        android:layout_alignEnd="@+id/btnDeseleccionar" />
 
 </RelativeLayout>

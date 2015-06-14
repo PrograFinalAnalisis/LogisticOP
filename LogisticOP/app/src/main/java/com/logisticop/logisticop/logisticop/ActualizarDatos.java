@@ -124,12 +124,6 @@ public class ActualizarDatos extends ActionBarActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_cargar_registro_actividades, menu);
-        return true;
-    }
 
     public void btnEditar(View v) { //boton editar
         //cuando la cantidad seleccionada sea igual 1 se podra entrar al metodo de actualizar
@@ -245,24 +239,4 @@ public class ActualizarDatos extends ActionBarActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        if (id == R.id.action_logout) {
-            Intent broadcastIntent = new Intent();
-            broadcastIntent
-                    .setAction("com.logisticop.logisticop.logisticop.ACTION_LOGOUT");
-            sendBroadcast(broadcastIntent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

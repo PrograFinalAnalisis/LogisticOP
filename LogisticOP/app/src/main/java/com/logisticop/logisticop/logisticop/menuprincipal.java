@@ -185,33 +185,7 @@ public class menuprincipal extends ActionBarActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_cargar_registro_actividades, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.menu_crear) {
-            Intent intent = null;
-            intent = new Intent(menuprincipal.this, Settings.class);
-            startActivity(intent);
-
-            return true;
-        }
-
-        if (id == R.id.action_logout) {
-
-            Intent broadcastIntent = new Intent();
-            broadcastIntent
-                    .setAction("com.logisticop.logisticop.logisticop.ACTION_LOGOUT");
-            sendBroadcast(broadcastIntent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 

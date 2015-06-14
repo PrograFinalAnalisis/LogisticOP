@@ -17,11 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.logisticop.logisticop.logisticop.MultiColumnasListview.CargarAct_Adapter;
 
 import java.sql.Connection;
@@ -37,6 +40,7 @@ import java.util.TreeMap;
 
 import clases.ActividadesSeleccionadas;
 import clases.CargarActividadesRegistradas;
+import clases.Cliente;
 
 import static android.database.sqlite.SQLiteDatabase.openDatabase;
 
@@ -46,6 +50,10 @@ import static android.database.sqlite.SQLiteDatabase.openDatabase;
 public class Sincronizar extends ActionBarActivity {
     private static String DB_PATH = "/data/data/com.logisticop.logisticop.logisticop/databases/";
     static Connection conexionMySQL;
+
+
+
+    public Spinner Sp_clientes;
 
     static java.sql.Connection connMySQL;
     final ArrayList<Map<String, CargarActividadesRegistradas>> mylist = new ArrayList<Map<String, CargarActividadesRegistradas>>();
@@ -121,6 +129,13 @@ public class Sincronizar extends ActionBarActivity {
         } catch (OutOfMemoryError e) {
             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+        Sp_clientes = (Spinner) findViewById(R.id.Sp_clientes);
+
+
+        cargarClientes();
+
+
         //cargo la configuración del metodo SharedPreferences de que se guarda en un xml
         cargarConfiguracion();
 
@@ -144,7 +159,8 @@ public class Sincronizar extends ActionBarActivity {
                     //limpiao la lista
                     lisAct.clear();
 
-                } else {
+                } else
+                {
                     lisAct.clear();
                     //agrego el dato seleccionado a la lista
                     lisAct.add(new ActividadesSeleccionadas(item.getNombreEmpleado(), item.getNombreActividad(), item.getHoras(),
@@ -159,6 +175,42 @@ public class Sincronizar extends ActionBarActivity {
             }
         });
     }
+
+
+
+    public void cargarClientes()
+    {
+
+        try {
+
+            db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+            Cursor filas = db.rawQuery("select * from  clientes", null);
+            //habro la conexion la base
+            //ejecuto un select
+            Spinner Sp_clientes3 = (Spinner) findViewById(R.id.Sp_clientes);
+            LinkedList<Cliente> spcliente = new LinkedList<Cliente>();
+            //creo un objecto de la clase de Cliente
+            while (filas.moveToNext())
+            {
+                spcliente.add(new Cliente(filas.getString(1),filas.getInt(0), filas.getInt(2), filas.getInt(3)));
+                //agrego los valores obtenidos del cursor a la clase departamento
+                //Creamos el adaptador
+            }
+            ArrayAdapter<Cliente> spinner_adapter = new ArrayAdapter<Cliente>(this, android.R.layout.simple_spinner_item, spcliente);
+            //Añadimos el layout para el menú y se lo damos al spinner
+            spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            Sp_clientes3.setAdapter(spinner_adapter);
+            db.close();//cierro conexion
+
+        } catch (Exception e) {
+
+            Toast.makeText(this, "Error de conexión, revise la configuración o verifique que el servidor esté encendido", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+    }//FIN cargarClientes
+
+
 
 
     public void BtnMisActividades(View v) {
@@ -201,11 +253,18 @@ public class Sincronizar extends ActionBarActivity {
         }
     }
 
-    public void BtnTodasActividades(View v) {
-        Mostrar();
+    public void BtnTodasActividades(View v)
+    {
+        //Se instancia un objeto de la clase IntentIntegrator
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        //Se procede con el proceso de scaneo
+        scanIntegrator.initiateScan();
+        //Mostrar();
     }
 
-    public void Mostrar() {
+    public void Mostrar()
+    {
+ /**
         try {
             listV.setAdapter(null);
             items.clear();
@@ -241,6 +300,7 @@ public class Sincronizar extends ActionBarActivity {
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+     **/
     }
 
 
@@ -307,12 +367,16 @@ public class Sincronizar extends ActionBarActivity {
         return Estado;
     }
 
-    public void BtnEnviar(View v) {
+    public void BtnEnviar(View v)
+    {
         Conexion();
     }
 
     // }//"Error de conexion, revise la configuracion o verifique que el servidor esta encendido"
-    public void enviar() {
+    public void enviar()
+    {
+
+        /**
         try {
 
 
@@ -385,10 +449,13 @@ public class Sincronizar extends ActionBarActivity {
             //   Toast.makeText(getApplicationContext(), "Error de conexion, revise la configuracion o verifique que el servidor esta encendid ", Toast.LENGTH_SHORT).show();
             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+
+   **/
     }
     //////////////////---------metodo para enviar todas las actividades
-
-    public void enviarTodasAct(View v) {
+/**
+    public void enviarTodasAct(View v)
+    {
         try {
 
 
@@ -469,6 +536,8 @@ public class Sincronizar extends ActionBarActivity {
             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    **/
     ///-------------------------------fin del metodo de enviar todas las act
 
 
@@ -508,32 +577,7 @@ public class Sincronizar extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_cargar_registro_actividades, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.action_logout) {
-            Intent broadcastIntent = new Intent();
-            broadcastIntent
-                    .setAction("com.logisticop.logisticop.logisticop.ACTION_LOGOUT");
-            sendBroadcast(broadcastIntent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
 
 
