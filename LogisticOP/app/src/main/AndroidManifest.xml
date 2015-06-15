@@ -34,26 +34,22 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".Settings"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
             android:name=".version"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".registro_de_actividades"
+            android:name=".registro_de_clientes"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".registro_de_actividades_por_clases"
+            android:name=".registro_de_productos"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Sincronizar"
             android:label="@string/title_activity_sincronizar"></activity>
         <activity
-            android:name=".ActualizarDatos"
+            android:name=".Logistica"
             android:label="@string/title_activity_actualizar_datos"></activity>
     </application>
 

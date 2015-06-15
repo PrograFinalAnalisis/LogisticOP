@@ -1,26 +1,13 @@
 package com.logisticop.logisticop.logisticop;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,21 +22,11 @@ import android.widget.FrameLayout;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.logisticop.logisticop.logisticop.MultiColumnasListview.CargarAct_Adapter;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
-import clases.ActividadesSeleccionadas;
-import clases.CargarActividadesRegistradas;
+
 import clases.Cliente;
 
 import static android.database.sqlite.SQLiteDatabase.openDatabase;
@@ -80,37 +57,6 @@ public class Sincronizar extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_sincronizar);
-      /*
-        try {
-
-        /*
-         * Codigo de para validacion de logout y registro del broadcastreceiver
-
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter
-                    .addAction("com.logisticop.logisticop.logisticop.ACTION_LOGOUT");
-            registerReceiver(new BroadcastReceiver() {
-
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    context.unregisterReceiver(this);
-                    Log.d("onReceive", "Cerrando Sesión");
-                /*
-                 * En este punto es que se destruye este Activity para que no
-				 * salga al presionar la tecla para volver atras, también
-				 * debería iniciarse la MainActivity
-
-
-                    Intent loginIntent = new Intent(context, MainActivity.class);
-                    startActivity(loginIntent);
-                    //unregisterReceiver(this);
-                    finish();
-                }
-            }, intentFilter);
-        } catch (OutOfMemoryError e) {
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
- */
 
         Sp_clientes = (Spinner) findViewById(R.id.Sp_clientes);
 
@@ -155,46 +101,6 @@ public class Sincronizar extends ActionBarActivity {
         ((TableLayout) findViewById(R.id.Tabla)).addView(separador_cabecera);
 
 
-        //cargo la configuración del metodo SharedPreferences de que se guarda en un xml
-        /**cargarConfiguracion();
-
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            CodigoID.append(bundle.getString("id2"));
-        }
-
-        //listV = (ListView) findViewById(R.id.SCHEDULE);
-        textView9 = (TextView) findViewById(R.id.textView9);
-        listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-
-                CargarActividadesRegistradas item = (CargarActividadesRegistradas) listV.getAdapter().getItem(position);
-                //obtengo la posicion selccionada
-                pos = lisAct.indexOf(item.getId());
-
-                if (pos >= 0) {
-                    //limpiao la lista
-                    lisAct.clear();
-
-                } else
-                {
-                    lisAct.clear();
-                    //agrego el dato seleccionado a la lista
-                    lisAct.add(new ActividadesSeleccionadas(item.getNombreEmpleado(), item.getNombreActividad(), item.getHoras(),
-                            item.getFecha(), item.getId(), item.getDescripcion(), item.getEditSequence(), item.getListId(), item.getCodigoAprovador(),
-                            item.getTxnID(), item.getCustomer_FullName(), item.getClass_FullName(), item.getPayrollItemWage_FullName(), item.getLinea(),
-                            item.getCodigoEmpleado(), item.getCodigoCliente(), item.getCodigoServicio(), item.getCodigoNomina(), item.getCodigoClase(),
-                            item.getCodigoEstado(), item.getCodigoDia(), item.getBillableStatus(), item.getPaquete(), item.getGrupo(), item.getCodigoCierre(),
-                            item.getCodigoEstadoRevision(), item.getCompleta(), item.getCodigoRevision(), item.getCodigoRegistrador(), item.getDuracion(),
-                            item.getFechaCreacion(), item.getFechaAprobacion()));
-                }
-
-            }
-        });
-
-**/
     }
 
 

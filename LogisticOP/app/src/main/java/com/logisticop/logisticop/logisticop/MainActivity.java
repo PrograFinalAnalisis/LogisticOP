@@ -158,7 +158,7 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(getApplicationContext(), "Se ha producido un error creando la base de datos",
                     Toast.LENGTH_LONG);
         }
-    }//metodo que no se sa pero sirve
+    }//metodo que no se
 
 
     public void insertIntoTable() {// inserto las horas a la tabla
@@ -262,18 +262,4 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (true)
-        {
-            Intent intent = null;
-            intent = new Intent(MainActivity.this, Settings.class);
-            startActivity(intent);
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

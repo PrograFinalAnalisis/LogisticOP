@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -89,11 +87,11 @@ public class menuprincipal extends ActionBarActivity {
                     bundle.putString("Activo" , ActivoNormal);
                     bundle.putString("id" , txtid.getText().toString() );
                     bundle.putString("NombreUsuario" , txtnombre.getText().toString() );
-                    //cuando el mensaje enviado a la clase registro_de_actividades sea ACTIVONORMAL
+                    //cuando el mensaje enviado a la clase registro_de_clientes sea ACTIVONORMAL
                     //el formulario entrara en el metodo de insertar a la base de datos
 
                     Intent intent = null;
-                    intent = new Intent(menuprincipal.this, registro_de_actividades.class);
+                    intent = new Intent(menuprincipal.this, registro_de_clientes.class);
                     intent.putExtras( bundle );
                     startActivity(intent);
 
@@ -117,7 +115,7 @@ public class menuprincipal extends ActionBarActivity {
 
 
                     Intent intent = null;
-                    intent = new Intent(menuprincipal.this, registro_de_actividades_por_clases.class);
+                    intent = new Intent(menuprincipal.this, registro_de_productos.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
 
@@ -170,7 +168,7 @@ public class menuprincipal extends ActionBarActivity {
                     //envio el id del empleado al formulario de actualizar
                     // con este ID se obtiene las actividades por usuario logueado
                     Intent intent = null;
-                    intent = new Intent(menuprincipal.this, ActualizarDatos.class);
+                    intent = new Intent(menuprincipal.this, Logistica.class);
                     intent.putExtras( bundle );
                     startActivity(intent);
 
