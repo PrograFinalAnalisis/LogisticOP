@@ -18,13 +18,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.view.ViewGroup.*;
+import android.graphics.*;
+import android.util.*;
+import android.view.Gravity;
+import android.widget.FrameLayout;
+
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.logisticop.logisticop.logisticop.MultiColumnasListview.CargarAct_Adapter;
 
 import java.sql.Connection;
@@ -55,56 +65,28 @@ public class Sincronizar extends ActionBarActivity {
 
     public Spinner Sp_clientes;
 
-    static java.sql.Connection connMySQL;
-    final ArrayList<Map<String, CargarActividadesRegistradas>> mylist = new ArrayList<Map<String, CargarActividadesRegistradas>>();
-    final Map<String, CargarActividadesRegistradas> map = new TreeMap<String, CargarActividadesRegistradas>();
-    final LinkedList<CargarActividadesRegistradas> list2 = new LinkedList<CargarActividadesRegistradas>();
-    boolean Estado = false, Datosmoviles = false, wifi = false;
+    static Connection connMySQL;
+
     private static String DB_NAME = "DB_LOGISTICOP.sqlite";
-    private ArrayList<HashMap<String, String>> list22;
+
     SQLiteDatabase db;
 
-    GridView CargarActividades;
-    int Consecutivo;
-    String Fecha = "";
-    String Horas = "";
-    List<String> ListNombres_Seleccionados;
-    String NombreAct = "";
-    String NombreEmp = "";
-    int b;
-    String base;
-    String clave;
-    String host;
-    String id = "";
-    List<CargarActividadesRegistradas> items = new ArrayList<CargarActividadesRegistradas>();
-    int j;
-    List<ActividadesSeleccionadas> lisAct = new ArrayList<ActividadesSeleccionadas>();
-    List<CargarActividadesRegistradas> lisActReg = new ArrayList<CargarActividadesRegistradas>();
-    ActividadesSeleccionadas ActSel = new ActividadesSeleccionadas();
-    // private ArrayList<HashMap<String, String>> list22;
-    ListView listV;
-    boolean Actualizado = false, Eliminado = false;
-    int pos;
-    String puerto;
-    private StringBuilder seleccionados;
-    private TextView textView10;
-    private TextView textView9;
-    String usuario;
-    ArrayList<String> valor;
-    int w;
-    ActividadesSeleccionadas ids;
-    private StringBuilder CodigoID = new StringBuilder();
+    GridView Productos;
+    int Fila = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_sincronizar);
+      /*
         try {
 
         /*
          * Codigo de para validacion de logout y registro del broadcastreceiver
-		 */
+
             IntentFilter intentFilter = new IntentFilter();
             intentFilter
                     .addAction("com.logisticop.logisticop.logisticop.ACTION_LOGOUT");
@@ -118,7 +100,7 @@ public class Sincronizar extends ActionBarActivity {
                  * En este punto es que se destruye este Activity para que no
 				 * salga al presionar la tecla para volver atras, también
 				 * debería iniciarse la MainActivity
-				 */
+
 
                     Intent loginIntent = new Intent(context, MainActivity.class);
                     startActivity(loginIntent);
@@ -129,15 +111,53 @@ public class Sincronizar extends ActionBarActivity {
         } catch (OutOfMemoryError e) {
             Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+ */
 
         Sp_clientes = (Spinner) findViewById(R.id.Sp_clientes);
 
 
         cargarClientes();
 
+        // Datos para la tabla
+        String cabeceras[] = { "Codigo", "Producto", "Cantidad" };
+
+
+
+        // Cabecera de la tabla
+        TableRow cabecera = new TableRow(this);
+        cabecera.setLayoutParams(new TableLayout.LayoutParams(
+                LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+        ((TableLayout) findViewById(R.id.Tabla)).addView(cabecera);
+
+        // Textos de la cabecera
+        for (int i = 0; i < cabeceras.length; i++)
+        {
+            TextView columna = new TextView(this);
+            columna.setLayoutParams(new TableRow.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            columna.setText(cabeceras[i]);
+            columna.setTextColor(Color.parseColor("#005500"));
+            columna.setTextSize(TypedValue.COMPLEX_UNIT_SP, 26);
+            columna.setGravity(Gravity.CENTER_HORIZONTAL);
+            columna.setPadding(5, 5, 5, 5);
+            cabecera.addView(columna);
+        }
+
+        // Línea que separa la cabecera de los datos
+        TableRow separador_cabecera = new TableRow(this);
+        separador_cabecera.setLayoutParams(new TableLayout.LayoutParams(
+                LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+        FrameLayout linea_cabecera = new FrameLayout(this);
+        TableRow.LayoutParams linea_cabecera_params =
+                new TableRow.LayoutParams(LayoutParams.FILL_PARENT, 2);
+        linea_cabecera_params.span = 6;
+        linea_cabecera.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        separador_cabecera.addView(linea_cabecera, linea_cabecera_params);
+        ((TableLayout) findViewById(R.id.Tabla)).addView(separador_cabecera);
+
 
         //cargo la configuración del metodo SharedPreferences de que se guarda en un xml
-        cargarConfiguracion();
+        /**cargarConfiguracion();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -145,7 +165,7 @@ public class Sincronizar extends ActionBarActivity {
             CodigoID.append(bundle.getString("id2"));
         }
 
-        listV = (ListView) findViewById(R.id.SCHEDULE);
+        //listV = (ListView) findViewById(R.id.SCHEDULE);
         textView9 = (TextView) findViewById(R.id.textView9);
         listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -174,7 +194,42 @@ public class Sincronizar extends ActionBarActivity {
 
             }
         });
+
+**/
     }
+
+
+
+    public void insertarFila(TableLayout miTabla,String pIdProducto, String pNombreProducto)
+    {
+
+        TextView Codigo;
+        TextView Nombre;
+        EditText cantidad;
+
+        TableRow fila = new TableRow(this);
+
+        Codigo = new TextView(this);
+
+        Codigo.setText(pIdProducto);
+        Codigo.setGravity(Gravity.CENTER_HORIZONTAL);
+        fila.addView(Codigo);
+
+
+        Nombre = new TextView(this);
+
+        Nombre.setText(pNombreProducto);
+        Nombre.setGravity(Gravity.CENTER_HORIZONTAL);
+        fila.addView(Nombre);
+
+        cantidad = new EditText(this);
+        cantidad.setGravity(Gravity.CENTER_HORIZONTAL);
+        fila.addView(cantidad);
+
+        miTabla.addView(fila);
+
+
+        }
 
 
 
@@ -213,45 +268,6 @@ public class Sincronizar extends ActionBarActivity {
 
 
 
-    public void BtnMisActividades(View v) {
-        try {
-            listV.setAdapter(null);
-            items.clear();
-            //limpio el adapter
-            db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-            //habro una conexion a la base de datos
-            //creo y ejecuto un donde carga las actividades por el coidgo de la persona logueada y por orden de fecha en forma desendente
-
-            Cursor c = db.rawQuery("select Entity_FullName , ItemService_FullName ,Horas , Fecha , _id,Descripcion ,EditSequence ,  ListId ," +
-                    "CodigoAprovador , TxnID , Customer_FullName ,Class_FullName ,PayrollItemWage_FullName ,  Linea, CodigoEmpleado , " +
-                    "CodigoCliente , CodigoServicio , CodigoNomina , CodigoClase , CodigoEstado ,CodigoDia ,BillableStatus , Paquete , " +
-                    "Grupo , CodigoCierre  ,CodigoEstadoRevision, Completa ,CodigoRevision,CodigoRegistrador  ," +
-                    "Duracion,FechaCreacion,FechaAprobacion   FROM actividades where CodigoEmpleado =" + CodigoID.toString() + " order by fecha desc", null);
-            while (c.moveToNext()) {
-                //recoorro el cursor para ver si trae algo
-                this.NombreEmp = c.getString(0);
-                this.NombreAct = c.getString(1);
-                this.Horas = c.getString(2);
-                this.Fecha = c.getString(3);
-                this.id = c.getString(4);
-                //agrego los valores que trago a una clase
-                items.add(new CargarActividadesRegistradas(c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4),
-                        c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getString(9), c.getString(10), c.getString(11), c.getString(12),
-                        c.getString(13), c.getInt(14), c.getInt(15), c.getInt(16), c.getInt(17), c.getInt(18), c.getInt(19), c.getInt(20), c.getInt(21),
-                        c.getInt(22), c.getInt(23), c.getInt(24), c.getInt(25), c.getInt(26), c.getInt(27), c.getInt(28), c.getFloat(29), c.getString(30),
-                        c.getString(31)));
-
-                //creo el adaptador con los valores agregados
-                CargarAct_Adapter adapter = new CargarAct_Adapter(this, items);
-                listV.setAdapter(adapter);
-                //y lo seteo
-
-            }
-            db.close();//cierro la conexion
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
 
     public void BtnTodasActividades(View v)
     {
@@ -259,112 +275,68 @@ public class Sincronizar extends ActionBarActivity {
         IntentIntegrator scanIntegrator = new IntentIntegrator(this);
         //Se procede con el proceso de scaneo
         scanIntegrator.initiateScan();
-        //Mostrar();
+
     }
 
-    public void Mostrar()
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
- /**
+        //Se obtiene el resultado del proceso de scaneo y se parsea
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanningResult != null) {
+            //Quiere decir que se obtuvo resultado pro lo tanto:
+            //Desplegamos en pantalla el contenido del c�digo de barra scaneado
+
+
+            String scanContent = scanningResult.getContents();
+
+            //Desplegamos en pantalla el nombre del formato del c�digo de barra scaneado
+            String scanFormat = scanningResult.getFormatName();
+
+
+            Mostrar(Integer.parseInt(scanContent));
+        }
+        else
+        {
+            //Quiere decir que NO se obtuvo resultado
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    "No se ha recibido datos del scaneo!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+
+    public void Mostrar(int pCodigo)
+    {
         try {
-            listV.setAdapter(null);
-            items.clear();
-            //  limpio los valores que esten en la lista
+
             db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-            //habro conexion y ejecuto un cursor el cual trae las actividades que esten en la tabla de actvidades en orden desc
-            Cursor c = db.rawQuery("select Entity_FullName , ItemService_FullName ,Horas , Fecha , _id,Descripcion ,EditSequence ,  ListId ," +
-                    "CodigoAprovador , TxnID , Customer_FullName ,Class_FullName ,PayrollItemWage_FullName ,  Linea, CodigoEmpleado , " +
-                    "CodigoCliente , CodigoServicio , CodigoNomina , CodigoClase , CodigoEstado ,CodigoDia ,BillableStatus , Paquete , " +
-                    "Grupo , CodigoCierre  ,CodigoEstadoRevision, Completa ,CodigoRevision,CodigoRegistrador  ," +
-                    "Duracion,FechaCreacion,FechaAprobacion   FROM actividades order by fecha desc", null);
-            while (c.moveToNext()) {
-                //recoorro el cursor para ver si trae algo
-                this.NombreEmp = c.getString(0);
-                this.NombreAct = c.getString(1);
-                this.Horas = c.getString(2);
-                this.Fecha = c.getString(3);
-                this.id = c.getString(4);
-                //agrego los valores que trago a una clase
-                items.add(new CargarActividadesRegistradas(c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4),
-                        c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getString(9), c.getString(10), c.getString(11), c.getString(12),
-                        c.getString(13), c.getInt(14), c.getInt(15), c.getInt(16), c.getInt(17), c.getInt(18), c.getInt(19), c.getInt(20), c.getInt(21),
-                        c.getInt(22), c.getInt(23), c.getInt(24), c.getInt(25), c.getInt(26), c.getInt(27), c.getInt(28), c.getFloat(29), c.getString(30),
-                        c.getString(31)));
-
-                //creo el adaptador con los valores agregados
-                CargarAct_Adapter adapter = new CargarAct_Adapter(this, items);
-                listV.setAdapter(adapter);
-
-                //lo seteo
+            Cursor filas = db.rawQuery("select _id,Nombre_Producto from  caja where _id = "+pCodigo, null);
+            //habro la conexion la base
+            //ejecuto un select
+            //creo un objecto de la clase de Cliente
+            while (filas.moveToNext())
+            {
+                //Insertamos En el grid
+                insertarFila((TableLayout) findViewById(R.id.Tabla), filas.getString(0), filas.getString(1));
             }
-            db.close();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-     **/
-    }
+            db.close();//cierro conexion
 
+        } catch (Exception e)
+        {
 
-    public void cargarConfiguracion() {
-        try {
-
-            // creo un SharedPreferences para obtener el que ya esta almacendao en labase de datos
-            //almaceno los valores para la conexion
-            SharedPreferences prefs =
-                    getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-            host = prefs.getString("Conexion", "");
-            clave = prefs.getString("Contrasena", "");
-            int puerto1 = 3306;
-            puerto1 = prefs.getInt("Puerto", 3306);
-            puerto = Integer.toString(puerto1);
-            usuario = prefs.getString("Usuario", "");
-            base = prefs.getString("Catalogo", "");
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(),
-                    "Error: " + e.getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error de conexión, revise la configuración o verifique que el servidor esté encendido", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
 
-    boolean Conexion() {
-        //En este metodo verifico que si esta conectado por medio
-        //de alguna red ya sea una red wifi o mivl
-        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo EstadoConexion = manager.getActiveNetworkInfo();
-        if (EstadoConexion != null) {
-            Datosmoviles = EstadoConexion.getType() == ConnectivityManager.TYPE_MOBILE;//obtine la información de la redes moviles. devuelve true o false
-            wifi = EstadoConexion.getType() == ConnectivityManager.TYPE_WIFI;//obtine la informacion de la red wifi. devuelve true o false
-            //si el estado de conexion esta conectado o esta conectandoce
-            if (EstadoConexion.isConnected() || EstadoConexion.isConnectedOrConnecting()) {
-                //si la inf}ormacion obtenidad de los datos wifi es true
-                //significa que esta conectado y sino verifica la conexion movil
-                //haber si esta conectado
-                if (wifi == true) {
-                    Estado = true;
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Conectado por WiFi",
-                            Toast.LENGTH_LONG).show();
-                    enviar();//ejecuta el metodo de enviar los datos a la base de mysql
-                }
-                if (Datosmoviles == true) {
-                    Estado = true;
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Estas Conectado Datos Moviles  este proceso puede tardar mas",
-                            Toast.LENGTH_LONG).show();
-                    enviar();
-                }
 
-            }
-        } else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    "Estas Desconectado del WiFi  por favor conectece a una red. ",
-                    Toast.LENGTH_LONG).show();
-            Estado = false;
-        }
-        return Estado;
+
+
+    boolean Conexion()
+    {
+        return true;
     }
 
     public void BtnEnviar(View v)
@@ -372,209 +344,8 @@ public class Sincronizar extends ActionBarActivity {
         Conexion();
     }
 
-    // }//"Error de conexion, revise la configuracion o verifique que el servidor esta encendido"
-    public void enviar()
-    {
-
-        /**
-        try {
 
 
-            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-            ActividadesSeleccionadas act = new ActividadesSeleccionadas();
-            String str;
-            ResultSet rs;
-            Statement st = null;
-
-            if (this.base != "") {
-                //usdo el drivers para la conexion con mysql con los datos obtenidos de SharedPreferences
-
-                str = "jdbc:mysql://" + this.host + ":" + this.puerto + "/" + this.base;
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                st = DriverManager.getConnection(str, this.usuario, this.clave).createStatement();
-
-            }
-            //recorro la clase con un for each
-            for (ActividadesSeleccionadas p : lisAct) {
-
-
-                rs = st.executeQuery("select max(Actividades) as Consecutivo from tb_consecutivos");
-                //asigno el valor obtenido a una variable
-                if (rs.next()) {
-                    Consecutivo = rs.getInt("Consecutivo");
-
-                }
-                //le sumo uno al consecutivo
-                int IncrementalParaMysql = Consecutivo + 1;
-                //inseto los valores en la base de datos ,utilizando el consecutivo
-                //en la base de datos de mysql
-                st.execute("Insert into tb_actividades(Id,CodigoEmpleado,CodigoCliente,CodigoServicio,CodigoNomina,CodigoClase,Duracion," +
-                        "Fecha,CodigoEstado,Descripcion,ListId,CodigoAprovador,Customer_FullName,ItemService_FullName" +
-                        ",Class_FullName,PayrollItemWage_FullName,Entity_FullName,BillableStatus,CodigoCierre," +
-                        "CodigoEstadoRevision,Completa,CodigoRevision,CodigoRegistrador,Horas)" +
-                        " values(" + IncrementalParaMysql + ",'" + p.getCodigoEmpleado() + "','" + p.getCodigoCliente() + "'," + "'"
-                        + p.getCodigoServicio() + "','" + p.getCodigoNomina() + "','" + p.getCodigoClase()
-                        + "','" + p.getDuracion() + "','" + p.getFecha() + "','" + p.getCodigoEstado() + "','"
-                        + p.getDescripcion() + "','" + p.getListId() + "','" + p.getCodigoAprovador() + "'," + "'"
-                        + p.getCustomer_FullName() + "','" + p.getNombreActividad() + "','" + p.getClass_FullName()
-                        + "','" + p.getPayrollItemWage_FullName() + "'," + "'" + p.getNombreEmpleado() + "','"
-                        + p.getBillableStatus() + "','" + p.getCodigoCierre() + "'," + "'" + p.getCodigoEstadoRevision()
-                        + "','" + p.getCompleta() + "','" + p.getCodigoRevision() + "','" + p.getCodigoRegistrador() + "'," + "'" + p.getHoras() + "')");
-                //actualizo el consecutivo en la tabla consecutivos
-                st.execute("update tb_consecutivos set Actividades=" + IncrementalParaMysql + " where idConse=" + 1 + "");
-
-
-                //habro conexion
-                db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-                String text = Integer.toString(pos);
-
-                String[] args = new String[]{text};
-                //actualizo el campo EstadoInsercion  en la base de sqlite para saber que se inserto en mysql
-                //este estado de insercion se usa para cuando el campo sea insertado  se podra eliminar esta campo
-                ActualizarEstadoInsercion(Integer.parseInt(p.getId()));
-
-                EliminarPorId(Integer.parseInt(p.getId()));
-                //elimino las actividades donde el campo EstadoInsercion sea igual Insertado
-
-
-                db.close();//cierro la conexion
-                //actualizo el listview con los nuevos datos es decir refresco los datos del listview
-                //usando el metodo de mostrar datos
-
-
-                Mostrar();
-                //}
-            }
-        } catch (Exception e) {
-            //   Toast.makeText(getApplicationContext(), "Error de conexion, revise la configuracion o verifique que el servidor esta encendid ", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-   **/
-    }
-    //////////////////---------metodo para enviar todas las actividades
-/**
-    public void enviarTodasAct(View v)
-    {
-        try {
-
-
-            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.LAX);
-            CargarActividadesRegistradas act = new CargarActividadesRegistradas();
-            String str;
-            ResultSet rs;
-            Statement st = null;
-
-            if (this.base != "") {
-                //uso el driver para la conexion con mysql con los datos obtenidos de SharedPreferences
-                str = "jdbc:mysql://" + this.host + ":" + this.puerto + "/" + this.base;
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                st = DriverManager.getConnection(str, this.usuario, this.clave).createStatement();
-
-            }
-
-            int contador = 0;
-
-            while (items.size() > contador) {
-                for (CargarActividadesRegistradas p : items) {
-
-
-                    rs = st.executeQuery("select max(Actividades) as Consecutivo from tb_consecutivos");
-                    //asigno el valor obtenido a una variable
-                    if (rs.next()) {
-                        Consecutivo = rs.getInt("Consecutivo");
-
-                    }
-                    //le sumo uno al consecutivo
-                    int il = Consecutivo + 1;
-                    //inseto todos los valores en la base de datos ,utilizando el consecutivo
-                    //en la base de datos de mysql
-                    st.execute("Insert into tb_actividades(Id,CodigoEmpleado,CodigoCliente,CodigoServicio,CodigoNomina,CodigoClase,Duracion," +
-                            "Fecha,CodigoEstado,Descripcion,ListId,CodigoAprovador,Customer_FullName,ItemService_FullName" +
-                            ",Class_FullName,PayrollItemWage_FullName,Entity_FullName,BillableStatus,CodigoCierre," +
-                            "CodigoEstadoRevision,Completa,CodigoRevision,CodigoRegistrador,Horas)" +
-                            " values(" + il + ",'" + p.getCodigoEmpleado() + "','" + p.getCodigoCliente() + "'," + "'"
-                            + p.getCodigoServicio() + "','" + p.getCodigoNomina() + "','" + p.getCodigoClase()
-                            + "','" + p.getDuracion() + "','" + p.getFecha() + "','" + p.getCodigoEstado() + "','"
-                            + p.getDescripcion() + "','" + p.getListId() + "','" + p.getCodigoAprovador() + "'," + "'"
-                            + p.getCustomer_FullName() + "','" + p.getNombreActividad() + "','" + p.getClass_FullName()
-                            + "','" + p.getPayrollItemWage_FullName() + "'," + "'" + p.getNombreEmpleado() + "','"
-                            + p.getBillableStatus() + "','" + p.getCodigoCierre() + "'," + "'" + p.getCodigoEstadoRevision()
-                            + "','" + p.getCompleta() + "','" + p.getCodigoRevision() + "','" + p.getCodigoRegistrador() + "'," + "'" + p.getHoras() + "')");
-                    //actualizo el consecutivo en la tabla consecutivos
-                    st.execute("update tb_consecutivos set Actividades=" + il + " where idConse=" + 1 + "");
-
-                    //actualizo el campo EstadoInsercion  en la base de sqlite para saber que se inserto en mysql
-                    //habro conexion
-                    db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-                    String text = Integer.toString(pos);
-
-                    String[] args = new String[]{text};
-                    //actualizo el campo EstadoInsercion  en la base de sqlite para saber que se inserto en mysql
-                    //este estado de insercion se usa para cuando el campo sea insertado  se podra eliminar esta campo
-
-
-                    ActualizarEstadoInsercion(Integer.parseInt(p.getId()));
-
-                    EliminarPorId(Integer.parseInt(p.getId()));
-                    //elimino las actividades donde el campo EstadoInsercion sea igual Insertado
-
-                    db.close();
-                    //cierro la conexion
-
-                    contador = contador + 1;
-                }
-                items.clear();//limpio la lista una vez enviado los datos
-                //actualizo el listview con los nuevos datos es decir refresco los datos del listview
-                //usando el metodo de mostrar datos
-
-                Mostrar();
-                //}
-            }
-        } catch (Exception e) {
-            //   Toast.makeText(getApplicationContext(), "Error de conexion, revise la configuracion o verifique que el servidor esta encendid ", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    **/
-    ///-------------------------------fin del metodo de enviar todas las act
-
-
-    public void EliminarPorId(int ids) {
-        try {
-            db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-            //habro la conexion a sqlite
-            //ejecuto un delete de las activades donde el valor de comlumna sea Insertqado
-            db.execSQL("delete from actividades where EstadoInsercion='Insertado' and _id=" + ids);
-            Eliminado = true;
-            db.close();//cierro conexion
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            //   textView10.setText(e.getMessage());
-        }
-
-    }
-
-    public void ActualizarEstadoInsercion(int pk) {
-
-
-        try {
-            db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-            //habro la conexion a sqlite
-            //ejecuto un update a la tabla actividades actualizando el valor a de la columna para
-            //que sea Insertado .. estoo con el fin de una vez actualizado cuando se ejecute el metodo
-            //se puedan borrar
-            db.execSQL("UPDATE actividades " +
-                    "SET EstadoInsercion='Insertado'" +
-                    " WHERE _id=" + pk + "");
-            Actualizado = true;
-            db.close();//cierro conexion
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-            //   textView10.setText(e.getMessage());
-        }
-    }
 
 
 

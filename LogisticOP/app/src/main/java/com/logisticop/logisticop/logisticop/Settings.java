@@ -159,7 +159,7 @@ public class Settings extends ActionBarActivity {
         if (usuario == "" || puerto == "" || ip == "") {
 
         } else {
-            java.sql.Connection connMySQL1 = null;
+            Connection connMySQL1 = null;
             if (Build.VERSION.SDK_INT >= 10) {
 
                 StrictMode.ThreadPolicy tp1 = StrictMode.ThreadPolicy.LAX;
@@ -172,7 +172,7 @@ public class Settings extends ActionBarActivity {
                     urlConexionMySQL = "jdbc:mysql://" + ip + ":" + puerto;
                 if (usuario != "" & contrasena != "" & ip != "" & puerto != "") {
                     try {
-                        java.sql.Connection connMySQL = null;
+                        Connection connMySQL = null;
                         // if (Build.VERSION.SDK_INT>= 10) {
                         StrictMode.ThreadPolicy tp = StrictMode.ThreadPolicy.LAX;
                         StrictMode.setThreadPolicy(tp);

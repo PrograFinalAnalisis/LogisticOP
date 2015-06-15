@@ -34,8 +34,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="21dp"
         android:textStyle="bold"
-        android:layout_marginLeft="51dp"
-        android:layout_marginStart="51dp"
+        android:layout_alignBaseline="@+id/txtdescripcion"
         android:layout_alignBottom="@+id/txtdescripcion"
         android:layout_toRightOf="@+id/TXTID_CLIENT"
         android:layout_toEndOf="@+id/TXTID_CLIENT" />
@@ -58,12 +57,12 @@
         android:textSize="18dp"
         android:background="@drawable/presionado"
         android:textStyle="bold"
-        android:layout_marginBottom="62dp"
-        android:layout_above="@+id/textView10"
+        android:layout_below="@+id/editText"
+        android:layout_toLeftOf="@+id/editText"
+        android:layout_marginTop="101dp"
+        android:layout_toEndOf="@+id/textView2"
         android:layout_alignLeft="@+id/lbtitulo"
-        android:layout_alignStart="@+id/lbtitulo"
-        android:layout_alignRight="@+id/lbtitulo"
-        android:layout_alignEnd="@+id/lbtitulo" />
+        android:layout_alignStart="@+id/lbtitulo" />
 
     <EditText
         style="@style/EditTextStyle"
@@ -74,10 +73,11 @@
 
         android:gravity="center"
         android:inputType="textMultiLine"
-        android:layout_marginTop="98dp"
         android:layout_below="@+id/TXTID_CLIENT"
-        android:layout_toRightOf="@+id/lbtitulo"
-        android:layout_toEndOf="@+id/lbtitulo" />
+        android:layout_alignLeft="@+id/lbtitulo"
+        android:layout_alignStart="@+id/lbtitulo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/TXTID_CLIENT"
@@ -110,10 +110,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="21dp"
         android:textStyle="bold"
-        android:layout_marginTop="132dp"
-        android:layout_below="@+id/lbclientes"
-        android:layout_alignLeft="@+id/lbclientes"
-        android:layout_alignStart="@+id/lbclientes" />
+        android:layout_marginTop="73dp"
+        android:layout_below="@+id/txtdescripcion"
+        android:layout_toRightOf="@+id/TXTID_CLIENT"
+        android:layout_toEndOf="@+id/TXTID_CLIENT" />
 
     <TextView
         style="@style/Header"
@@ -126,10 +126,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="21dp"
         android:textStyle="bold"
-        android:layout_above="@+id/btnguardarDatos"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="105dp" />
+        android:layout_below="@+id/editText2"
+        android:layout_toRightOf="@+id/TXTID_CLIENT"
+        android:layout_toEndOf="@+id/TXTID_CLIENT"
+        android:layout_marginTop="88dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -148,8 +148,10 @@
         android:ems="10"
         android:id="@+id/editText2"
         android:layout_alignBottom="@+id/textView"
-        android:layout_alignLeft="@+id/txtdescripcion"
-        android:layout_alignStart="@+id/txtdescripcion" />
+        android:layout_alignRight="@+id/txtdescripcion"
+        android:layout_alignEnd="@+id/txtdescripcion"
+        android:layout_toRightOf="@+id/lbtitulo"
+        android:layout_toEndOf="@+id/lbtitulo" />
 
 
 </RelativeLayout>

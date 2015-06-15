@@ -8,32 +8,28 @@
     <Button
 
         android:id="@+id/btnregistro"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="175dp"
+        android:layout_height="125dp"
         android:textSize="18dp"
         android:drawableTop="@drawable/ic_account_circle_black_48dp"
         android:text="@string/registro_actividades"
         android:background="@drawable/presionado"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/lbMenu"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
 
         android:id="@+id/btnregistro_clases"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="175dp"
+        android:layout_height="125dp"
         android:textSize="18dp"
         android:drawableTop="@drawable/ic_arrange_send_backward_black_48dp"
         android:text="@string/btnregistro_clases"
         android:background="@drawable/presionado"
         android:layout_alignTop="@+id/btnregistro"
-        android:layout_toRightOf="@+id/btnregistro"
-        android:layout_toEndOf="@+id/btnregistro"
-        android:layout_marginLeft="41dp"
-        android:layout_marginStart="41dp" />
+        android:layout_alignLeft="@+id/btnActualizar"
+        android:layout_alignStart="@+id/btnActualizar" />
 
 
     <TextView
@@ -45,38 +41,34 @@
         android:text="Menu"
         android:textSize="45dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="91dp"
         android:layout_below="@+id/relativeLayout"
         android:layout_centerHorizontal="true" />
 
 
     <Button
         android:id="@+id/btnSincr"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="175dp"
+        android:layout_height="125dp"
         android:textSize="18dp"
         android:drawableTop="@drawable/ic_account_multiple_black_48dp"
         android:text="@string/sincronizar"
         android:background="@drawable/presionado"
         android:layout_alignTop="@+id/btnActualizar"
-        android:layout_toLeftOf="@+id/btnregistro_clases"
-        android:layout_toStartOf="@+id/btnregistro_clases" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
 
         android:id="@+id/btnActualizar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="175dp"
+        android:layout_height="125dp"
         android:textSize="18dp"
         android:text="Calcular Logística"
         android:drawableTop="@drawable/ic_sync_black_48dp"
         android:background="@drawable/presionado"
-        android:layout_below="@+id/btnregistro_clases"
-        android:layout_marginTop="30dp"
-        android:layout_alignLeft="@+id/btnregistro_clases"
-        android:layout_alignStart="@+id/btnregistro_clases"
-        android:layout_alignRight="@+id/btnregistro_clases"
-        android:layout_alignEnd="@+id/btnregistro_clases" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -84,7 +76,10 @@
         android:background="@android:color/transparent"
         android:gravity="left"
         android:elevation="20dp"
-        android:id="@+id/relativeLayout">
+        android:id="@+id/relativeLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/txtbienvenida"
@@ -110,10 +105,9 @@
             android:text="Num Usuario :"
             android:textSize="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginLeft="123dp"
-            android:layout_marginStart="123dp"
-            android:layout_alignBaseline="@+id/txtid"
-            android:layout_alignBottom="@+id/txtid"
+            android:layout_marginLeft="62dp"
+            android:layout_marginStart="62dp"
+            android:layout_alignTop="@+id/txtid"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 

@@ -27,8 +27,7 @@
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/txttittle"
-        android:layout_above="@+id/relativeLayout2" />
+        android:layout_below="@+id/txttittle" />
 
     <RelativeLayout
         android:layout_width="700dp"
