@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.curso.pruebadegui"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.curso.pruebadegui.Ventana_Principal"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.curso.pruebadegui.Ventana_Escoger_Cliente"
+            android:label="@string/title_activity_ventana__escoger__cliente" >
+        </activity>
+        <activity
+            android:name="com.example.curso.pruebadegui.Ventana_Codigo_Producto"
+            android:label="@string/title_activity_ventana__codigo__producto" >
+        </activity>
+        <activity
+            android:name="com.example.curso.pruebadegui.Ventana_Usuario"
+            android:label="@string/title_activity_ventana__usuario" >
+        </activity>
+        <activity
+            android:name="com.example.curso.pruebadegui.Ventana_Agregar_Paquete"
+            android:label="@string/title_activity_ventana__agregar__paquete" >
+        </activity>
+        <activity
+            android:name="com.example.curso.pruebadegui.Prueba"
+            android:label="@string/title_activity_prueba" >
+        </activity>
+        <activity
+            android:name="com.example.curso.pruebadegui.Ventana_Consultas"
+            android:label="@string/title_activity_ventana__consultas" >
+        </activity>
+        <activity
+            android:name="com.example.curso.pruebadegui.Ventana_Informacion_Envio"
+            android:label="@string/title_activity_ventana__informacion__envio" >
+        </activity>
+    </application>
+
+</manifest>
