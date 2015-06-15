@@ -65,14 +65,13 @@ public class Sincronizar extends ActionBarActivity {
 
     public Spinner Sp_clientes;
 
-    static Connection connMySQL;
+
+    boolean Insertado;
 
     private static String DB_NAME = "DB_LOGISTICOP.sqlite";
 
     SQLiteDatabase db;
 
-    GridView Productos;
-    int Fila = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -223,6 +222,7 @@ public class Sincronizar extends ActionBarActivity {
         fila.addView(Nombre);
 
         cantidad = new EditText(this);
+        cantidad.setText("1");
         cantidad.setGravity(Gravity.CENTER_HORIZONTAL);
         fila.addView(cantidad);
 
@@ -247,7 +247,10 @@ public class Sincronizar extends ActionBarActivity {
             //creo un objecto de la clase de Cliente
             while (filas.moveToNext())
             {
-                spcliente.add(new Cliente(filas.getString(1),filas.getInt(0), filas.getInt(2), filas.getInt(3)));
+
+
+
+                spcliente.add(new Cliente(filas.getString(1),filas.getInt(2), filas.getInt(3), filas.getInt(0)));
                 //agrego los valores obtenidos del cursor a la clase departamento
                 //Creamos el adaptador
             }
@@ -334,16 +337,48 @@ public class Sincronizar extends ActionBarActivity {
 
 
 
-    boolean Conexion()
+    boolean Conexion(TableLayout miTabla,Spinner idCliente)
     {
-        return true;
+        for(int i=2;i<miTabla.getChildCount();i++)
+        {
+            TableRow row = (TableRow) miTabla.getChildAt(i);
+            Insertar_Pedido_Sqlite(((Cliente) idCliente.getSelectedItem()).idCliente,
+                                    Integer.parseInt(((TextView) row.getChildAt(0)).getText().toString()),
+                                    Integer.parseInt(((EditText) row.getChildAt(2)).getText().toString()));
+        }
+
+        return Insertado;
     }
 
     public void BtnEnviar(View v)
     {
-        Conexion();
+        if(Conexion((TableLayout) findViewById(R.id.Tabla), (Spinner) findViewById(R.id.Sp_clientes)))
+        {
+            Toast.makeText(this, "Pedido insertado con exito.", Toast.LENGTH_LONG).show();
+        }
+
     }
 
+
+    //metodo de insertar
+    public void Insertar_Pedido_Sqlite(int idCliente, int idCaja, int cantidad)
+    {
+        try {
+            db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+            //habro conexion y ejecuto el INSERT
+            db.execSQL("INSERT INTO pedidos(id_Cliente,id_Caja,cantidad,fecha)"
+                    + " VALUES("+idCliente+"," + idCaja + "," + cantidad + ",date('now'))");
+            Insertado = true;
+
+            db.close();//cierro conexion
+            db.close();
+        } catch (Exception e)
+        {
+            Insertado = false;
+            Toast.makeText(getApplicationContext(),
+                    "Error ", Toast.LENGTH_LONG);
+        }
+    }
 
 
 

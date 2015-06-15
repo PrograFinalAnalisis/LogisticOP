@@ -7,31 +7,43 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.logisticop.logisticop.logisticop.MultiColumnasListview.CargarAct_Adapter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import clases.ActividadesSeleccionadas;
 import clases.CargarActividadesRegistradas;
+import clases.*;
 
 import static android.database.sqlite.SQLiteDatabase.openDatabase;
 
 
-public class ActualizarDatos extends ActionBarActivity {
+public class ActualizarDatos extends ActionBarActivity
+{
     private static String DB_NAME = "DB_LOGISTICOP.sqlite"; /// nombre de la base de datos
     private static String DB_PATH = "/data/data/com.logisticop.logisticop.logisticop/databases/";// ubicación en la raiz de android de donde se encuentra la base de datos
-    List<CargarActividadesRegistradas> items = new ArrayList<CargarActividadesRegistradas>(); // list de la clase CargarActividadesRegistradas y lo asigno como arraylist
-    List<ActividadesSeleccionadas> lisAct = new ArrayList<ActividadesSeleccionadas>();// list de la clase ActividadesSeleccionadas y lo asigno como arraylist
     int cant;
     SQLiteDatabase db;//objeto de base sqlite
     ListView listV;
@@ -40,203 +52,223 @@ public class ActualizarDatos extends ActionBarActivity {
     private StringBuilder CodigoCliente = new StringBuilder();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actualizar_datos);
         /*
          * Codigo de para validacion de logout y registro del broadcastreceiver
 		 */
-        try {
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter
-                    .addAction("com.logisticop.logisticop.logisticop.ACTION_LOGOUT");
-            registerReceiver(new BroadcastReceiver() {
 
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    context.unregisterReceiver(this);
-                    Log.d("onReceive", "Cerrando Sesión");
-                /*
-				 * En este punto es que se destruye este Activity para que no
-				 * salga al presionar la tecla para volver atras, también
-				 * debería iniciarse la MainActivity
-				 */
+        // Datos para la tabla
+        String cabeceras[] = { "Camion #", "Nombre Cliente", "Hora Salida" };
 
-                    Intent loginIntent = new Intent(context, MainActivity.class);
-                    startActivity(loginIntent);
-                   // unregisterReceiver(this);
-                    finish();
-                }
-            }, intentFilter);
-        } catch (OutOfMemoryError e) {
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+        // Cabecera de la tabla
+        TableRow cabecera = new TableRow(this);
+        cabecera.setLayoutParams(new TableLayout.LayoutParams(
+                ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        ((TableLayout) findViewById(R.id.TablaResultado)).addView(cabecera);
+
+        // Textos de la cabecera
+        for (int i = 0; i < cabeceras.length; i++)
+        {
+            TextView columna = new TextView(this);
+            columna.setLayoutParams(new TableRow.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            columna.setText(cabeceras[i]);
+            columna.setTextColor(Color.parseColor("#005500"));
+            columna.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            columna.setGravity(Gravity.CENTER_HORIZONTAL);
+            columna.setPadding(5, 5, 5, 5);
+            cabecera.addView(columna);
         }
 
-        listV = (ListView) findViewById(R.id.listV);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            CodigoCliente.append(bundle.getString("id3"));
-            //obtengo el valor del id del codigo del empleado logueado
-        }
-        //evento click de listview
+        // Línea que separa la cabecera de los datos
+        TableRow separador_cabecera = new TableRow(this);
+        separador_cabecera.setLayoutParams(new TableLayout.LayoutParams(
+                ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        FrameLayout linea_cabecera = new FrameLayout(this);
+        TableRow.LayoutParams linea_cabecera_params =
+                new TableRow.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, 2);
+        linea_cabecera_params.span = 6;
+        linea_cabecera.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        separador_cabecera.addView(linea_cabecera, linea_cabecera_params);
+        ((TableLayout) findViewById(R.id.TablaResultado)).addView(separador_cabecera);
 
-        listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
-                //envio las variables al activity
-                ////En el metodo setOnItemClickListener del listview lo que hago es lo siguiente
-                //primero si la cantidad (uso la variable cant) es cero entonces significa que  no se ha seleccionado ninguna actividad todavia
-                if (cant == 0) {
-                    lisAct.clear();
-                    CargarActividadesRegistradas item = (CargarActividadesRegistradas) listV.getAdapter().getItem(position);
-                    // creando un objecto de la clase CargarActividadesRegistradas y segun la posicion en el momento que este en el listview
-                    //lo almaceno en la clase ActividadesSeleccionadas
-                    lisAct.add(new ActividadesSeleccionadas(item.getIdprim(), item.getNombreEmpleado(), item.getNombreActividad(), item.getHoras(),
-                            item.getFecha(), item.getId(), item.getDescripcion(), item.getEditSequence(), item.getListId(), item.getCodigoAprovador(),
-                            item.getTxnID(), item.getCustomer_FullName(), item.getClass_FullName(), item.getPayrollItemWage_FullName(), item.getLinea(),
-                            item.getCodigoEmpleado(), item.getCodigoCliente(), item.getCodigoServicio(), item.getCodigoNomina(), item.getCodigoClase(),
-                            item.getCodigoEstado(), item.getCodigoDia(), item.getBillableStatus(), item.getPaquete(), item.getGrupo(), item.getCodigoCierre(),
-                            item.getCodigoEstadoRevision(), item.getCompleta(), item.getCodigoRevision(), item.getCodigoRegistrador(), item.getDuracion(),
-                            item.getFechaCreacion(), item.getFechaAprobacion()));
-                    //paso la variable cant a 1 indicando que ya se selcciono ah alguien
-                    cant = 1;
-                } else {
-                    lisAct.clear();//limpio la lista
-                    // limpia los elementos seleccionados
-                    listV.clearChoices();
-                    listV.requestLayout();
-                    // creando un objecto de la clase CargarActividadesRegistradas y segun la posicion en el momento que este en el listview
-                    //lo almaceno en la clase ActividadesSeleccionadas
-                    CargarActividadesRegistradas item = (CargarActividadesRegistradas) listV.getAdapter().getItem(position);
-                    lisAct.add(new ActividadesSeleccionadas(item.getIdprim(), item.getNombreEmpleado(), item.getNombreActividad(), item.getHoras(),
-                            item.getFecha(), item.getId(), item.getDescripcion(), item.getEditSequence(), item.getListId(), item.getCodigoAprovador(),
-                            item.getTxnID(), item.getCustomer_FullName(), item.getClass_FullName(), item.getPayrollItemWage_FullName(), item.getLinea(),
-                            item.getCodigoEmpleado(), item.getCodigoCliente(), item.getCodigoServicio(), item.getCodigoNomina(), item.getCodigoClase(),
-                            item.getCodigoEstado(), item.getCodigoDia(), item.getBillableStatus(), item.getPaquete(), item.getGrupo(), item.getCodigoCierre(),
-                            item.getCodigoEstadoRevision(), item.getCompleta(), item.getCodigoRevision(), item.getCodigoRegistrador(), item.getDuracion(),
-                            item.getFechaCreacion(), item.getFechaAprobacion()));
-                    cant = 1;
 
-                }
 
-            }
-        });
+        cargarLogistica();
+
+        eliminarPedidos();
+
+
     }
 
 
-    public void btnEditar(View v) { //boton editar
-        //cuando la cantidad seleccionada sea igual 1 se podra entrar al metodo de actualizar
-        if (cant == 1) {
-            // con un foreach recorro la clase ActividadesSeleccionadas
-            for (ActividadesSeleccionadas p : lisAct) {
 
-                Bundle bundle = new Bundle();
-                bundle.putString("Mensaje", Mensaje);// envio un string con el valor "Actualizar" esto para cuando reciba
-                //la palabra actualizar el formulario de registro de actividades que hace las 2 funciones de registrar y actualizar
-                //en el mismo formulario entre al metodo actualizar
-                //   bundle.putString("NombreUsuario" , NombreUsuario );
+    public void cargarLogistica()
+    {
+        administradorPedidos miAdministradorPedidos = new administradorPedidos();
+        Cliente [] listaClientes = cargarClientes();
 
-                /// envio los valores de la actividad selecciona
-                bundle.putString("CodigoEmpleado", p.getId());
-                bundle.putInt("CodigoCliente", p.getCodigoCliente());
-                bundle.putInt("CodigoServicio", p.getCodigoServicio());
-                bundle.putInt("CodigoNomina", p.getCodigoNomina());
-                bundle.putInt("CodigoClase", p.getCodigoClase());
-                bundle.putFloat("Duracion", p.getDuracion());
-                bundle.putString("Fecha", p.getFecha());
-                bundle.putString("descripcion", p.getDescripcion());
-                bundle.putString("listID", p.getListId());
-                bundle.putString("customer_FullName2", p.getCustomer_FullName());
-                bundle.putString("itemService_FullName2", p.getNombreActividad());
-                bundle.putString("class_FullName2", p.getClass_FullName());
-                bundle.putString("payrollItemWage_FullName2", p.getPayrollItemWage_FullName());
-                bundle.putString("entity_FullName2", p.getNombreEmpleado());
-                bundle.putInt("CodigoRegistrador", p.getCodigoRegistrador());
-                bundle.putString("Horas", p.getHoras());
-                bundle.putInt("idPrim", p.getIdprim());
+        Cliente [] listaClientesEnOrdenVisita = miAdministradorPedidos.rutaASeguir(listaClientes);
+
+        ArrayList<caja> listaCajas = cargarCajas(listaClientes);
+
+        ArrayList<camion> miListaCamiones = miAdministradorPedidos.crearPedidos(listaCajas, listaClientesEnOrdenVisita);/// eviamos al algoritmo geedy los datos
 
 
-                Intent intent = null;
-                intent = new Intent(ActualizarDatos.this, registro_de_actividades.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-
+        ///Esta iteracion es para reviar los datos luego se quita
+        for(int i = 0;i<miListaCamiones.size();i++)
+        {
+        //    System.out.println("Camion numero " + miListaCamiones.get(i).idCamion);
+            for(int j = 0;j < miListaCamiones.get(i).listaClientesAVisitar.size();j++)
+            {
+                insertarFila(((TableLayout) findViewById(R.id.TablaResultado)), "Camion "+(i+1),
+                             miListaCamiones.get(i).listaClientesAVisitar.get(j).nombreCliente,
+                            Integer.toString(miListaCamiones.get(i).listaClientesAVisitar.get(j).horaInicioEntrega));
             }
+
         }
+
     }
 
-    public void MisDatos(View v) {// este metodo sirve para traer todas las actividades que corresponden a la persona logueada
+    public void insertarFila(TableLayout miTabla,String pCamion, String pCliente, String pHora)
+    {
+
+        TextView Camion;
+        TextView Cliente;
+        TextView Hora;
+
+        TableRow fila = new TableRow(this);
+
+        Camion = new TextView(this);
+
+        Camion.setText(pCamion);
+        Camion.setGravity(Gravity.CENTER_HORIZONTAL);
+        fila.addView(Camion);
+
+
+        Cliente = new TextView(this);
+
+        Cliente.setText(pCliente);
+        Cliente.setGravity(Gravity.CENTER_HORIZONTAL);
+        fila.addView(Cliente);
+
+        Hora = new TextView(this);
+        Hora.setText(pHora);
+        Hora.setGravity(Gravity.CENTER_HORIZONTAL);
+        fila.addView(Hora);
+
+        miTabla.addView(fila);
+
+
+    }
+
+    public Cliente[] cargarClientes()
+    {
+
+        Cliente[] misClientes = null;
         try {
-            listV.setAdapter(null);//limpio el adapter
-            items.clear();//y limpio los items de la lista CargarActividadesRegistradas
 
             db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-            //abro la conexion a la base sqlite y ejecuto el select para traer los datos correspondiente al empleado logueado
-            Cursor c = db.rawQuery("select _id,Entity_FullName , ItemService_FullName ,Horas , Fecha , _id,Descripcion ,EditSequence ,  ListId ," +
-                    "CodigoAprovador , TxnID , Customer_FullName ,Class_FullName ,PayrollItemWage_FullName ,  Linea, CodigoEmpleado , " +
-                    "CodigoCliente , CodigoServicio , CodigoNomina , CodigoClase , CodigoEstado ,CodigoDia ,BillableStatus , Paquete , " +
-                    "Grupo , CodigoCierre  ,CodigoEstadoRevision, Completa ,CodigoRevision,CodigoRegistrador  ," +
-                    "Duracion,FechaCreacion,FechaAprobacion FROM actividades where CodigoEmpleado =" + CodigoCliente.toString() + " order by fecha desc", null);
-
-            while (c.moveToNext()) {
-                // recorro el cursor y voy almacenado cada actividad que encuntre en la base de datos en la clase CargarActividadesRegistradas
-
-                items.add(new CargarActividadesRegistradas(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(5),
-                        c.getString(6), c.getString(7), c.getString(8), c.getString(9), c.getString(10), c.getString(11), c.getString(12), c.getString(13),
-                        c.getString(14), c.getInt(15), c.getInt(16), c.getInt(17), c.getInt(18), c.getInt(19), c.getInt(20), c.getInt(21), c.getInt(22),
-                        c.getInt(23), c.getInt(24), c.getInt(25), c.getInt(26), c.getInt(27), c.getInt(28), c.getInt(29), c.getFloat(30), c.getString(31),
-                        c.getString(32)));
-
-
-                CargarAct_Adapter adapter = new CargarAct_Adapter(this, items);//este es un adaptador personalizado
-                listV.setAdapter(adapter);//seteo el adapter
+            Cursor filas = db.rawQuery("select * from  clientes", null);
+            //habro la conexion la base
+            //ejecuto un select
+            LinkedList<Cliente> spcliente = new LinkedList<Cliente>();
+            //creo un objecto de la clase de Cliente
+            while (filas.moveToNext())
+            {
+                spcliente.add(new Cliente(filas.getString(1),filas.getInt(2), filas.getInt(3), filas.getInt(0)));
             }
-            db.close();//cierro la conexion
 
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            misClientes = new Cliente[spcliente.size()];
+            for(int i =0;i<misClientes.length;i++)
+            {
+                misClientes[i] = spcliente.get(i);
+            }
+
+
+            db.close();//cierro conexion
+
+        } catch (Exception e)
+        {
+
+            Toast.makeText(this, "Error de conexión, revise la configuración o verifique que el servidor esté encendido", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
 
-    }
+        return misClientes;
+    }//FIN cargarClientes
 
 
-    public void VerRegistro(View v) {
+    public ArrayList<caja> cargarCajas(Cliente[] pListaClientes)
+    {
+
+        ArrayList<caja>  misCajas = null;
         try {
-            listV.setAdapter(null);//limpio el adapter
-            items.clear();//y limpio los items de la lista CargarActividadesRegistradas
 
             db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
-            //abro la conexion a la base sqlite y ejecuto el select para traer los datos registradas y ordenas por fechas
-
-            Cursor c = db.rawQuery("select _id,Entity_FullName , ItemService_FullName ,Horas , Fecha , _id,Descripcion ,EditSequence ,  ListId ," +
-                    "CodigoAprovador , TxnID , Customer_FullName ,Class_FullName ,PayrollItemWage_FullName ,  Linea, CodigoEmpleado , " +
-                    "CodigoCliente , CodigoServicio , CodigoNomina , CodigoClase , CodigoEstado ,CodigoDia ,BillableStatus , Paquete , " +
-                    "Grupo , CodigoCierre  ,CodigoEstadoRevision, Completa ,CodigoRevision,CodigoRegistrador  ," +
-                    "Duracion,FechaCreacion,FechaAprobacion FROM actividades  order by fecha desc", null);
-
-            //   "Duracion,FechaCreacion,FechaAprobacion FROM actividades where CodigoEmpleado ="+ CodigoCliente.toString()+" order by fecha desc", null);
-            while (c.moveToNext()) {
-                // recorro el cursor y voy almacenado cada actividad que encuntre en la base de datos en la clase CargarActividadesRegistradas
-
-                items.add(new CargarActividadesRegistradas(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(5),
-                        c.getString(6), c.getString(7), c.getString(8), c.getString(9), c.getString(10), c.getString(11), c.getString(12), c.getString(13),
-                        c.getString(14), c.getInt(15), c.getInt(16), c.getInt(17), c.getInt(18), c.getInt(19), c.getInt(20), c.getInt(21), c.getInt(22),
-                        c.getInt(23), c.getInt(24), c.getInt(25), c.getInt(26), c.getInt(27), c.getInt(28), c.getInt(29), c.getFloat(30), c.getString(31),
-                        c.getString(32)));
+            Cursor filas = db.rawQuery("select Base,Altura,Profundidad,id_Cliente,cantidad from  caja,pedidos where caja._id = pedidos.id_Caja", null);
+            //habro la conexion la base
+            //ejecuto un select
+            misCajas = new ArrayList<caja>();
+            //creo un objecto de la clase de Cliente
+            while (filas.moveToNext())
+            {
 
 
-                CargarAct_Adapter adapter = new CargarAct_Adapter(this, items);//este es un adaptador personalizado
-                listV.setAdapter(adapter);//seteo el adapter
+                for(int i= 0;i<pListaClientes.length;i++)
+                {
+                    if(filas.getInt(3) == pListaClientes[i].idCliente)
+                    {
+                        for(int j = 0;j<filas.getInt(4);j++)
+                        {
+                            misCajas.add(new caja(filas.getInt(2),filas.getInt(1),filas.getInt(0),pListaClientes[i]));
+                        }
+                    }
+                }
             }
-            db.close();
+            db.close();//cierro conexion
 
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e)
+        {
+
+            Toast.makeText(this, "Error de conexión, revise la configuración o verifique que el servidor esté encendido", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
 
-    }
+        return misCajas;
+    }//FIN cargarClientes
+
+
+    public void eliminarPedidos()
+    {
+        try {
+
+            db = openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+            db.execSQL("Delete from pedidos");
+            db.close();//cierro conexion
+
+        } catch (Exception e)
+        {
+            Toast.makeText(this, "Error de conexión, revise la configuración o verifique que el servidor esté encendido", Toast.LENGTH_LONG).show();
+            //  Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }//FIN cargarClientes
+
+
+
+
+
+
+
+
+
+
 
 }

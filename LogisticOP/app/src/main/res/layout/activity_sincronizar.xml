@@ -70,8 +70,8 @@
         android:layout_alignTop="@+id/btnTodas"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/btnDeseleccionar"
-        android:layout_toRightOf="@+id/btnDeseleccionar" />
+        android:layout_toEndOf="@+id/lbclientes"
+        android:layout_toRightOf="@+id/lbclientes" />
 
     <Button
         android:layout_width="250dp"
@@ -83,7 +83,9 @@
         android:textSize="21dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/lbclientes"
+        android:layout_toStartOf="@+id/lbclientes" />
 
 
 
